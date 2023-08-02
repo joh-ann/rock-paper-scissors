@@ -1,17 +1,112 @@
 * {
-    border: 1px solid green;
+    border: 1px solid green
 }
 
 body {
     display: flex;
     justify-content: center;
     height: 100vh;
+    background-color: #3C5F5F;
+    font-family: 'Roboto', sans-serif;
 }
 
 main {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
     width: 100%;
+    background-color: #81A59C;
 }
 
 aside {
     width: 30%;
+    background-color: #588B8B;
+}
+
+.player-container,
+.computer-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #B9C9BB;
+}
+
+.player-figure,
+.computer-figure {
+    height: 150px;
+    width: 150px;
+
+}
+
+.player-score,
+.computer-score {
+    width: 100px;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30%;
+}
+
+.change-game {
+    padding: 5%;
+    background-color: #426969;
+    color: #FFFFFF;
+    border: 2px solid #3C5F5F;
+}
+
+.change-game:hover {
+    cursor: pointer;
+    background-color: #81A59C;
+}
+
+.change-game:active {
+    background-color: #426969;
+}
+
+.title-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-size: 60px;
+    margin: auto;
+    color: #F3F6F4;
+}
+
+.status {
+    font-size: 20px;
+    margin: auto;
+    color: #F3F6F4;
+}
+
+.main-wrapper { 
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.intro {
+    display: flex;
+    justify-content: center;
+    height: 40%;
+    width: 60%;
+    background-color: #588B8B;
+    border: 2px solid #3C5F5F;
+}
+
+.choose {
+    display: flex;
+    justify-content: center;
+    height: 40%;
+    width: 80%;
+    background-color: #588B8B;
+    border: 2px solid #3C5F5F;
 }
