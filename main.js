@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-}
+});
 
 // Query Selectors
 var playerScore = document.querySelector(".player-score");
@@ -16,6 +16,29 @@ var main = document.querySelector("main");
 
 // Global Variables
 
+var gameData = {
+    choices: ["rock", "paper", "scissors"],
+    playerScore: 0,
+    computerScore: 0
+}
+
+// Game logic:
+// Rock beats Scissors
+// Scissors beats Paper
+// Paper beats Rock
+
+// Score and status update:
+// Update win counter
+
+// Reset and play again
+
 
 // Functions
-
+function createPlayer(name, token, wins) {
+    var player = {
+        name: name,
+        token: token,
+        wins: wins || 0,
+    }
+    return player
+}
