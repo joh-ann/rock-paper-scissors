@@ -104,3 +104,9 @@ function updateScore(game) {
     }
 }
 
+// reset game
+function resetGame(game) {
+    game.human.isWinner = false
+    game.computer.isWinner = false
+    return game
+}
