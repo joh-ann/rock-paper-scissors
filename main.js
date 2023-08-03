@@ -48,12 +48,12 @@ function createGame(player1, player2) {
         player1: {
             name: player1.name,
             choice: player1.choice,
-            wins: 0
+            isWinner: false
         },
         player2: {
             name: player2.name,
             choice: player2.choice,
-            wins: 0
+            isWinner: false
         }
     }
     return game
