@@ -34,11 +34,27 @@ var gameData = {
 
 
 // Functions
-function createPlayer(name, token, wins) {
+function createPlayer(name, choice) {
     var player = {
         name: name,
-        token: token,
-        wins: wins || 0,
+        choice: choice,
+        wins: 0
     }
     return player
+}
+
+function createGame(player1, player2) {
+    var game = {
+        player1: {
+            name: player1.name,
+            choice: player1.choice,
+            wins: 0
+        },
+        player2: {
+            name: player2.name,
+            choice: player2.choice,
+            wins: 0
+        }
+    }
+    return game
 }
