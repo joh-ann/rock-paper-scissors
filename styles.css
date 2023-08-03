@@ -105,8 +105,15 @@ aside {
 .choose {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 40%;
     width: 80%;
     background-color: #588B8B;
     border: 2px solid #3C5F5F;
+}
+
+.token {
+    height: 150px;
+    width: 150px;
+    margin: 10px;
 }
