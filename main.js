@@ -68,27 +68,21 @@ function getResult(game, choice, compChoice) {
     var resLoss = `<strong>You LOSE!</strong> Computer chose ${compChoice}.`
 
     if (choice === compChoice) {
-        hideTokens();
-        displayTokens(choice, compChoice)
         updateStatus(resDraw);
     }
     else if (choice === 'Rock' && compChoice === 'Scissors') {
         game.human.isWinner = true
-        hideTokens();
         updateStatus(resWin);
     }
     else if (choice === 'Paper' && compChoice === 'Rock') {
         game.human.isWinner = true
-        hideTokens();
         updateStatus(resWin);
     }
     else if (choice === 'Scissors' && compChoice === 'Paper') {
         game.human.isWinner = true
-        hideTokens();
         updateStatus(resWin);
     } else {
         game.computer.isWinner = true
-        hideTokens();
         updateStatus(resLoss);
     }
 }
@@ -131,18 +125,22 @@ function getChoice(event) {
         human = createPlayer('Human', choice);
         computer = createPlayer('Computer', compChoice);
         var game = createGame(human, computer);
-        updateStatus(compMsg)
+        updateStatus(compMsg);
+        hideTokens();
 
         // Prevent spam clicking
         buttonsDisabled = true; 
 
         setTimeout(function() {
             getResult(game, choice, compChoice)
+            displayTokens(choice, compChoice)
             updateScore(game);
             resetGame(game);
             // Re-enable button
             buttonsDisabled = false;
-        }, 2000) // Delay time
+
+            setTimeout(showAllTokens, 2500); // Adjust the delay as needed
+        }, 2000); // Delay time
     }
 }
 
@@ -191,9 +189,15 @@ function hideTokens() {
     scissors.classList.add("hidden");
 }
 
-function displayTokens(humToken, compToken) {
-    var humToken = choice;
+function displayTokens(choice, compChoice) {
+    var humanToken = choice;
     var compToken = compChoice;
+    document.getElementById(humanToken).classList.remove("hidden");
+    document.getElementById(compToken).classList.remove("hidden");
+}
 
-    rock.classList.add("hidden")
+function showAllTokens() {
+    rock.classList.remove("hidden");
+    paper.classList.remove("hidden");
+    scissors.classList.remove("hidden");
 }
