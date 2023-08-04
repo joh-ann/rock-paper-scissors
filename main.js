@@ -66,24 +66,24 @@ function createGame(human, computer) {
 // update isWinner value
 // return status (maybe another function)
 
-function getResult(game, choice) {
-    if (choice === game.computer.choice) {
+function getResult(game, choice, compChoice) {
+    if (choice === compChoice) {
         return `DRAW! You both chose ${choice}.`// updateStatus(draw)
     }
-    else if (choice === 'Rock' && game.computer.choice === 'Scissors') {
+    else if (choice === 'Rock' && compChoice === 'Scissors') {
         game.human.isWinner = true
         return `You win! Rock beats Scissors.` // updateStatus(win)
     }
-    else if (choice === 'Paper' && game.computer.choice === 'Rock') {
+    else if (choice === 'Paper' && compChoice === 'Rock') {
         game.human.isWinner = true
         return `You win! Paper beats Rock.` // updateStatus(win)
     }
-    else if (choice === 'Scissors' && game.computer.choice === 'Paper') {
+    else if (choice === 'Scissors' && compChoice === 'Paper') {
         game.human.isWinner = true
         return `You win! Scissors beats paper.` // updateStatus(win)
     } else {
         game.computer.isWinner = true
-        return `You lose. ${game.computer.choice} beats ${choice}.`
+        return `You lose. ${compChoice} beats ${choice}.`
     }
 }
 
@@ -108,11 +108,12 @@ function resetGame(game) {
 
 function getChoice(event) {
     var choice = event.target.getAttribute("id")
+    var compChoice = getComputerChoice()
     if (choice) {
         human = createPlayer('Human', choice)
-        computer = createPlayer('Computer', 'Paper')
+        computer = createPlayer('Computer', compChoice)
         var game = createGame(human, computer)
-        console.log(getResult(game, choice))
+        console.log(getResult(game, choice, compChoice))
         updateScore(game)
         resetGame(game)
     }
