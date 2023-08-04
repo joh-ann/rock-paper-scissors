@@ -107,6 +107,7 @@ aside {
 
 .result {
     font-size: 2em;
+    font-weight: 100;
     margin: auto;
     color: #F3F6F4;
 }
@@ -151,7 +152,7 @@ aside {
 }
 
 body, main {
-    background: linear-gradient(-45deg, #386FA4, #417DB1, #59A5D8, #84D2F6);
+    background: linear-gradient(-45deg, #386FA4, #417DB1, #59A5D8, #386FA4);
     background-size: 300% 300%;
     animation: gradient 15s ease infinite;
     height: 100vh;
@@ -159,7 +160,7 @@ body, main {
 
 @keyframes gradient {
     0% {
-        background-position: 0% 50%;
+        background-position: 0% 100%;
     }
  
     50% {
