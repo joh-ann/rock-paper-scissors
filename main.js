@@ -17,14 +17,12 @@ var paper = document.querySelector("#paper");
 var scissors = document.querySelector("#scissors");
 
 // Event Listeners
-choose.addEventListener('click', getChoice)
+choose.addEventListener('click', getChoice);
 intro.addEventListener('click', function(event) {
     if (event.target.classList.contains("classic")) {
-        console.log('classic')
         chooseClassic(event)
     }
     if (event.target.classList.contains("variation")) {
-        console.log('variation')
         chooseVariation(event)
     }
 })
@@ -33,17 +31,6 @@ var gameData = {
     playerScore: 0,
     computerScore: 0
 }
-
-// Game logic:
-// Rock beats Scissors
-// Scissors beats Paper
-// Paper beats Rock
-
-// Score and status update:
-// Update win counter
-
-// Reset and play again
-
 
 // Functions
 function createPlayer(name, choice) {
@@ -67,14 +54,8 @@ function createGame(human, computer) {
             isWinner: false,
         }
     }
-    return game
+    return game;
 }
-
-// pass in game
-// check for draw
-// check win conditions
-// update isWinner value
-// return status (maybe another function)
 
 function getResult(game, choice, compChoice) {
     var resDraw = `<strong>It's a DRAW!</strong> You both chose ${choice}.`
@@ -82,76 +63,69 @@ function getResult(game, choice, compChoice) {
     var resLoss = `<strong>You LOSE!</strong> Computer chose ${compChoice}.`
 
     if (choice === compChoice) {
-        // return `DRAW! You both chose ${choice}.`
-        updateStatus(resDraw)
+        updateStatus(resDraw);
     }
     else if (choice === 'Rock' && compChoice === 'Scissors') {
         game.human.isWinner = true
-        // return `You win! Rock beats Scissors.`
-        updateStatus(resWin)
+        updateStatus(resWin);
     }
     else if (choice === 'Paper' && compChoice === 'Rock') {
         game.human.isWinner = true
-        // return `You win! Paper beats Rock.`
-        updateStatus(resWin)
+        updateStatus(resWin);
     }
     else if (choice === 'Scissors' && compChoice === 'Paper') {
         game.human.isWinner = true
-        // return `You win! Scissors beats paper.`
-        updateStatus(resWin)
+        updateStatus(resWin);
     } else {
         game.computer.isWinner = true
-        // return `You lose. ${compChoice} beats ${choice}.`
-        updateStatus(resLoss)
+        updateStatus(resLoss);
     }
 }
 
-// update score and status
 function updateScore(game) {
     if (game.human.isWinner === true && game.computer.isWinner === false) {
-        var human = game.human
-        gameData.playerScore += 1
-        updateWins(human)
-        return game
+        var human = game.human;
+        gameData.playerScore += 1;
+        updateWins(human);
+        return game;
     }
     if (game.human.isWinner === false && game.computer.isWinner === true) {
-        var computer = game.computer
-        gameData.computerScore += 1
-        updateWins(computer)
-        return game
+        var computer = game.computer;
+        gameData.computerScore += 1;
+        updateWins(computer);
+        return game;
     }
     if (game.human.isWinner === false && game.computer.isWinner === false) {
-        playerScore.style.color = 'black'
-        computerScore.style.color = 'black'
+        playerScore.style.color = 'black';
+        computerScore.style.color = 'black';
     }
 }
 
-// reset game
 function resetGame(game) {
-    game.human.isWinner = false
-    game.computer.isWinner = false
-    return game
+    game.human.isWinner = false;
+    game.computer.isWinner = false;
+    return game;
 }
 
 function getChoice(event) {
-    var choice = event.target.getAttribute("id")
-    var compChoice = getComputerChoice()
+    var choice = event.target.getAttribute("id");
+    var compChoice = getComputerChoice();
     if (choice) {
-        human = createPlayer('Human', choice)
-        computer = createPlayer('Computer', compChoice)
-        var game = createGame(human, computer)
-        console.log(getResult(game, choice, compChoice))
-        updateScore(game)
-        resetGame(game)
+        human = createPlayer('Human', choice);
+        computer = createPlayer('Computer', compChoice);
+        var game = createGame(human, computer);
+        getResult(game, choice, compChoice);
+        updateScore(game);
+        resetGame(game);
     }
 }
 
 function getComputerChoice() {
-    var rps = ["Rock", "Paper", "Scissors"]
-    var randomIndex = Math.floor(Math.random() * rps.length)
-    var compChoice = rps[randomIndex]
-    console.log(compChoice)
-    return compChoice
+    var rps = ["Rock", "Paper", "Scissors"];
+    var randomIndex = Math.floor(Math.random() * rps.length);
+    var compChoice = rps[randomIndex];
+    // console.log(compChoice)
+    return compChoice;
 }
 
 function updateStatus(result) {
@@ -160,21 +134,21 @@ function updateStatus(result) {
 
 function updateWins(winner) {
     if (winner.name === 'Human') {
-        playerScore.innerText = gameData.playerScore
-        playerScore.style.color = 'green'
-        computerScore.style.color = 'black'
+        playerScore.innerText = gameData.playerScore;
+        playerScore.style.color = 'green';
+        computerScore.style.color = 'black';
     }
     if (winner.name === 'Computer') {
-        computerScore.innerText = gameData.computerScore
-        computerScore.style.color = 'green'
-        playerScore.style.color = 'black'
+        computerScore.innerText = gameData.computerScore;
+        computerScore.style.color = 'green';
+        playerScore.style.color = 'black';
     }
 }
 
 function chooseClassic(event) {
-    intro.classList.add("hidden")
+    intro.classList.add("hidden");
 }
 
 function chooseVariation(event) {
-    intro.classList.add("hidden")
+    intro.classList.add("hidden");
 }
