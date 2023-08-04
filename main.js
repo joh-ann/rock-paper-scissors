@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Query Selectors
 var playerScore = document.querySelector(".player-score");
 var computerScore = document.querySelector(".computer-score");
-var result = document.querySelector(".result");
+var resultMsg = document.querySelector(".result");
 var changeGameBtn = document.querySelector(".change-game");
 var intro = document.querySelector(".intro");
 var choose = document.querySelector(".choose");
@@ -67,23 +67,32 @@ function createGame(human, computer) {
 // return status (maybe another function)
 
 function getResult(game, choice, compChoice) {
+    var resDraw = `<strong>It's a DRAW!</strong> You both chose ${choice}.`
+    var resWin = `<strong>You WIN!</strong> Computer chose ${compChoice}.`
+    var resLoss = `<strong>You LOSE!</strong> Computer chose ${compChoice}.`
+
     if (choice === compChoice) {
-        return `DRAW! You both chose ${choice}.`// updateStatus(draw)
+        // return `DRAW! You both chose ${choice}.`
+        updateStatus(resDraw)
     }
     else if (choice === 'Rock' && compChoice === 'Scissors') {
         game.human.isWinner = true
-        return `You win! Rock beats Scissors.` // updateStatus(win)
+        // return `You win! Rock beats Scissors.`
+        updateStatus(resWin)
     }
     else if (choice === 'Paper' && compChoice === 'Rock') {
         game.human.isWinner = true
-        return `You win! Paper beats Rock.` // updateStatus(win)
+        // return `You win! Paper beats Rock.`
+        updateStatus(resWin)
     }
     else if (choice === 'Scissors' && compChoice === 'Paper') {
         game.human.isWinner = true
-        return `You win! Scissors beats paper.` // updateStatus(win)
+        // return `You win! Scissors beats paper.`
+        updateStatus(resWin)
     } else {
         game.computer.isWinner = true
-        return `You lose. ${compChoice} beats ${choice}.`
+        // return `You lose. ${compChoice} beats ${choice}.`
+        displayResult(resLoss)
     }
 }
 
@@ -125,4 +134,8 @@ function getComputerChoice() {
     var compChoice = rps[randomIndex]
     console.log(compChoice)
     return compChoice
+}
+
+function updateStatus(result) {
+    resultMsg.innerHTML = result
 }
