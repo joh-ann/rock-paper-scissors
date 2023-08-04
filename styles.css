@@ -182,6 +182,10 @@ aside {
     margin: 10px;
 }
 
+.token:hover {
+    cursor: pointer;
+}
+
 .avatar {
     height: 150px;
     width: 150px;
