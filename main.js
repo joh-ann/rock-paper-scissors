@@ -88,10 +88,11 @@ function getResult(game, choice) {
 
 // update score and status
 function updateScore(game) {
-    if (game.human.isWinner === true) {
+    if (game.human.isWinner === true && game.computer.isWinner === false) {
         gameData.playerScore += 1
         return game
-    } else if (game.computer.isWinner === false) {
+    }
+    if (game.human.isWinner === false && game.computer.isWinner === true) {
         gameData.computerScore += 1
         return game
     }
