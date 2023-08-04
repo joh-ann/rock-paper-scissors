@@ -49,10 +49,12 @@ function createPlayer(name, choice) {
 function createGame(human, computer) {
     var game = {
         human: {
+            name: 'Human',
             choice: human.choice,
             isWinner: false,
         },
         computer: {
+            name: 'Computer',
             choice: computer.choice,
             isWinner: false,
         }
@@ -92,18 +94,22 @@ function getResult(game, choice, compChoice) {
     } else {
         game.computer.isWinner = true
         // return `You lose. ${compChoice} beats ${choice}.`
-        displayResult(resLoss)
+        updateStatus(resLoss)
     }
 }
 
 // update score and status
 function updateScore(game) {
     if (game.human.isWinner === true && game.computer.isWinner === false) {
+        var human = game.human
         gameData.playerScore += 1
+        updateWins(human)
         return game
     }
     if (game.human.isWinner === false && game.computer.isWinner === true) {
+        var computer = game.computer
         gameData.computerScore += 1
+        updateWins(computer)
         return game
     }
 }
@@ -139,3 +145,17 @@ function getComputerChoice() {
 function updateStatus(result) {
     resultMsg.innerHTML = result
 }
+
+function updateWins(winner) {
+    if (winner.name === 'Human') {
+        playerScore.innerText = gameData.playerScore
+        playerScore.style.color = 'green'
+        computerScore.style.color = 'black'
+    }
+    if (winner.name === 'Computer') {
+        computerScore.innerText = gameData.computerScore
+        computerScore.style.color = 'green'
+        playerScore.style.color = 'black'
+    }
+}
+    
