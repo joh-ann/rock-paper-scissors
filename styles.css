@@ -1,5 +1,5 @@
 * {
-    /* border: 1px solid green; */
+    border: 1px solid green;
     font-family: 'Fira Sans', sans-serif;
 }
 
@@ -127,7 +127,7 @@ aside {
     border-radius: 10px;
 }
 
-.classic, .variation {
+#classic-btn, #variation-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -142,12 +142,14 @@ aside {
     color: #05204A;
 }
 
-.classic p, .variation p {
-    margin: 2px;
+.classic-wrapper, .variation-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .classic-wrapper {
-    margin-top: 25px;
+    margin-top: 25px;    
 }
 
 .classic:hover, .variation:hover {
@@ -160,7 +162,7 @@ aside {
 }
 
 .classic-title, .variation-title {
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-weight: 700;
 }
 

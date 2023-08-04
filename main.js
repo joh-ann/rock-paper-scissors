@@ -8,6 +8,8 @@ var computerScore = document.querySelector(".computer-score");
 var resultMsg = document.querySelector(".result");
 var changeGameBtn = document.querySelector(".change-game");
 var intro = document.querySelector(".intro");
+    // var classicBtn = document.querySelector(".classic-btn");
+    // var variationBtn = document.querySelector(".variation-btn");
 var choose = document.querySelector(".choose");
 var main = document.querySelector("main");
 
@@ -17,7 +19,18 @@ var paper = document.querySelector("#paper");
 var scissors = document.querySelector("#scissors");
 
 // Event Listeners
-main.addEventListener('click', getChoice)
+choose.addEventListener('click', getChoice)
+intro.addEventListener('click', function(event) {
+    if (event.target.classList.contains("classic")) {
+        console.log('it worked')
+        // chooseClassic(event)
+    }
+    // if (event.target.classList.contains("variation-btn")) {
+    //     chooseVariation(event)
+    // }
+})
+
+// variationBtn.addEventListener('click', chooseGame)
 
 // Global Variables
 
@@ -162,4 +175,9 @@ function updateWins(winner) {
         playerScore.style.color = 'black'
     }
 }
-    
+
+function chooseGame(event) {
+    if (event.target.classList.contains("classic-btn")) {
+        
+    }
+}
