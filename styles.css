@@ -152,7 +152,7 @@ aside {
     margin-top: 25px;    
 }
 
-.classic:hover, .variation:hover {
+.classic:hover, .variation:hover, #classic-btn:hover, #variation-btn:hover {
     cursor: pointer;
     background-color: #E8E9EB;
 }
