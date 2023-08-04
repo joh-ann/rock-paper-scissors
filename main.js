@@ -112,13 +112,17 @@ function resetGame(game) {
 function getChoice(event) {
     var choice = event.target.getAttribute("id");
     var compChoice = getComputerChoice();
+    var compMsg = `Computer is deciding...`
     if (choice) {
         human = createPlayer('Human', choice);
         computer = createPlayer('Computer', compChoice);
         var game = createGame(human, computer);
-        getResult(game, choice, compChoice);
+        updateStatus(compMsg)
+        setTimeout(function() {
+        getResult(game, choice, compChoice)
         updateScore(game);
         resetGame(game);
+        }, 2000)
     }
 }
 
