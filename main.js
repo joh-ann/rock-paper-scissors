@@ -15,9 +15,9 @@ var choose = document.querySelector(".choose");
 var main = document.querySelector("main");
 
 // Buttons
-var rock = document.querySelector("#rock");
-var paper = document.querySelector("#paper");
-var scissors = document.querySelector("#scissors");
+var rock = document.querySelector("#Rock");
+var paper = document.querySelector("#Paper");
+var scissors = document.querySelector("#Scissors");
 
 // Event Listeners
 choose.addEventListener('click', getChoice);
@@ -68,21 +68,27 @@ function getResult(game, choice, compChoice) {
     var resLoss = `<strong>You LOSE!</strong> Computer chose ${compChoice}.`
 
     if (choice === compChoice) {
+        hideTokens();
+        displayTokens(choice, compChoice)
         updateStatus(resDraw);
     }
     else if (choice === 'Rock' && compChoice === 'Scissors') {
         game.human.isWinner = true
+        hideTokens();
         updateStatus(resWin);
     }
     else if (choice === 'Paper' && compChoice === 'Rock') {
         game.human.isWinner = true
+        hideTokens();
         updateStatus(resWin);
     }
     else if (choice === 'Scissors' && compChoice === 'Paper') {
         game.human.isWinner = true
+        hideTokens();
         updateStatus(resWin);
     } else {
         game.computer.isWinner = true
+        hideTokens();
         updateStatus(resLoss);
     }
 }
@@ -177,4 +183,17 @@ function chooseVariation(event) {
 
 function changeGame() {
     location.reload()
+}
+
+function hideTokens() {
+    rock.classList.add("hidden");
+    paper.classList.add("hidden");
+    scissors.classList.add("hidden");
+}
+
+function displayTokens(humToken, compToken) {
+    var humToken = choice;
+    var compToken = compChoice;
+
+    rock.classList.add("hidden")
 }
