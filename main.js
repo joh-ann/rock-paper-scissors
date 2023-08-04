@@ -92,18 +92,24 @@ function getResult(game, choice, compChoice) {
     } else {
         game.computer.isWinner = true
         // return `You lose. ${compChoice} beats ${choice}.`
-        displayResult(resLoss)
+        updateStatus(resLoss)
     }
 }
 
 // update score and status
 function updateScore(game) {
     if (game.human.isWinner === true && game.computer.isWinner === false) {
+        var human = game.human
+        var winner = human
         gameData.playerScore += 1
+        updateWins(winner, human)
         return game
     }
     if (game.human.isWinner === false && game.computer.isWinner === true) {
+        var human = game.human
+        var winner = computer
         gameData.computerScore += 1
+        updateWins(winner, computer)
         return game
     }
 }
@@ -140,5 +146,12 @@ function updateStatus(result) {
     resultMsg.innerHTML = result
 }
 
-function updateWins(winner)
+function updateWins(winner, player) {
+    if (winner = player) {
+        playerScore.innerText = gameData.playerScore
+    }
+    if (winner === player) {
+        computerScore.innerText = gameData.computerScore
+    }
+}
     
