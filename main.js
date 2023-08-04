@@ -82,6 +82,7 @@ function getResult(game, choice) {
         game.human.isWinner = true
         return `You win! Scissors beats paper.` // updateStatus(win)
     } else {
+        game.computer.isWinner = true
         return `You lose. ${game.computer.choice} beats ${choice}.`
     }
 }
