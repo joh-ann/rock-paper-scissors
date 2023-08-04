@@ -106,7 +106,7 @@ function updateScore(game) {
         return game
     }
     if (game.human.isWinner === false && game.computer.isWinner === true) {
-        var human = game.human
+        var computer = game.computer
         var winner = computer
         gameData.computerScore += 1
         updateWins(winner, computer)
