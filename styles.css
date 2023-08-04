@@ -208,3 +208,7 @@ body, main {
         background-position: 0% 50%;
     }
 }
+
+.hidden {
+    display: none;
+}

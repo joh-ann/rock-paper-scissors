@@ -8,8 +8,6 @@ var computerScore = document.querySelector(".computer-score");
 var resultMsg = document.querySelector(".result");
 var changeGameBtn = document.querySelector(".change-game");
 var intro = document.querySelector(".intro");
-    // var classicBtn = document.querySelector(".classic-btn");
-    // var variationBtn = document.querySelector(".variation-btn");
 var choose = document.querySelector(".choose");
 var main = document.querySelector("main");
 
@@ -22,17 +20,14 @@ var scissors = document.querySelector("#scissors");
 choose.addEventListener('click', getChoice)
 intro.addEventListener('click', function(event) {
     if (event.target.classList.contains("classic")) {
-        console.log('it worked')
-        // chooseClassic(event)
+        console.log('classic')
+        chooseClassic(event)
     }
-    // if (event.target.classList.contains("variation-btn")) {
-    //     chooseVariation(event)
-    // }
+    if (event.target.classList.contains("variation")) {
+        console.log('variation')
+        chooseVariation(event)
+    }
 })
-
-// variationBtn.addEventListener('click', chooseGame)
-
-// Global Variables
 
 var gameData = {
     playerScore: 0,
@@ -176,8 +171,10 @@ function updateWins(winner) {
     }
 }
 
-function chooseGame(event) {
-    if (event.target.classList.contains("classic-btn")) {
-        
-    }
+function chooseClassic(event) {
+    intro.classList.add("hidden")
+}
+
+function chooseVariation(event) {
+    intro.classList.add("hidden")
 }
