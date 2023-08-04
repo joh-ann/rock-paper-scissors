@@ -112,6 +112,10 @@ function updateScore(game) {
         updateWins(computer)
         return game
     }
+    if (game.human.isWinner === false && game.computer.isWinner === false) {
+        playerScore.style.color = 'black'
+        computerScore.style.color = 'black'
+    }
 }
 
 // reset game
