@@ -167,10 +167,12 @@ function updateWins(winner) {
 
 function chooseClassic(event) {
     intro.classList.add("hidden");
+    choose.classList.remove("hidden");
 }
 
 function chooseVariation(event) {
     intro.classList.add("hidden");
+    choose.classList.remove("hidden");
 }
 
 function changeGame() {
