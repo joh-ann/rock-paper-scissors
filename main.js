@@ -117,3 +117,11 @@ function getChoice(event) {
         resetGame(game)
     }
 }
+
+function getComputerChoice() {
+    var rps = ["Rock", "Paper", "Scissors"]
+    var randomIndex = Math.floor(Math.random() * rps.length)
+    var compChoice = rps[randomIndex]
+    console.log(compChoice)
+    return compChoice
+}
