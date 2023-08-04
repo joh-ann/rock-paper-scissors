@@ -26,7 +26,9 @@ intro.addEventListener('click', function(event) {
         chooseVariation(event)
     }
 })
+changeGameBtn.addEventListener('click', changeGame);
 
+// Data Model
 var gameData = {
     playerScore: 0,
     computerScore: 0
@@ -151,4 +153,8 @@ function chooseClassic(event) {
 
 function chooseVariation(event) {
     intro.classList.add("hidden");
+}
+
+function changeGame() {
+    location.reload()
 }
