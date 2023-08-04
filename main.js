@@ -139,3 +139,6 @@ function getComputerChoice() {
 function updateStatus(result) {
     resultMsg.innerHTML = result
 }
+
+function updateWins(winner)
+    
