@@ -11,8 +11,13 @@ var intro = document.querySelector(".intro");
 var choose = document.querySelector(".choose");
 var main = document.querySelector("main");
 
-// Event Listeners
+// Buttons
+var rock = document.querySelector("#rock");
+var paper = document.querySelector("#paper");
+var scissors = document.querySelector("#scissors");
 
+// Event Listeners
+main.addEventListener('click', getChoice)
 
 // Global Variables
 
@@ -20,15 +25,6 @@ var gameData = {
     playerScore: 0,
     computerScore: 0
 }
-
-// getChoice function
-var human = createPlayer('Human', 'Rock')
-var computer = createPlayer('Computer', 'Scissors')
-
-// variables for tokens?
-// var rock = 
-// var paper =
-// var scissors = 
 
 // Game logic:
 // Rock beats Scissors
@@ -63,9 +59,6 @@ function createGame(human, computer) {
     }
     return game
 }
-
-// get game instance
-var game = createGame(human, computer)
 
 // pass in game
 // check for draw
@@ -109,4 +102,15 @@ function resetGame(game) {
     game.human.isWinner = false
     game.computer.isWinner = false
     return game
+}
+
+function getChoice(event) {
+    var choice = event.target.getAttribute("id")
+    if (choice) {
+        human = createPlayer('Human', choice)
+        computer = createPlayer('Computer', 'Paper')
+        var game = createGame(human, computer)
+        console.log(getResult(game))
+        updateScore(game)
+    }
 }
