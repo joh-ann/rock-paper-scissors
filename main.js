@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+// Variables
+var buttonsDisabled = false;
+
 // Query Selectors
 var playerScore = document.querySelector(".player-score");
 var computerScore = document.querySelector(".computer-score");
@@ -110,19 +113,30 @@ function resetGame(game) {
 }
 
 function getChoice(event) {
+    if (buttonsDisabled) {
+        return;
+    }
+
     var choice = event.target.getAttribute("id");
     var compChoice = getComputerChoice();
     var compMsg = `Computer is deciding...`
+
     if (choice) {
         human = createPlayer('Human', choice);
         computer = createPlayer('Computer', compChoice);
         var game = createGame(human, computer);
         updateStatus(compMsg)
+
+        // Prevent spam clicking
+        buttonsDisabled = true; 
+
         setTimeout(function() {
-        getResult(game, choice, compChoice)
-        updateScore(game);
-        resetGame(game);
-        }, 2000)
+            getResult(game, choice, compChoice)
+            updateScore(game);
+            resetGame(game);
+            // Re-enable button
+            buttonsDisabled = false;
+        }, 2000) // Delay time
     }
 }
 
