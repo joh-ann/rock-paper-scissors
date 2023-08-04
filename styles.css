@@ -1,5 +1,5 @@
 * {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     font-family: 'Fira Sans', sans-serif;
 }
 
@@ -129,24 +129,38 @@ aside {
 
 .classic, .variation {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
-    background-color: #D3D4D6;
+    background-color: #DEDFE1;
+    border: none;
     border-radius: 10px;
-    padding: 40px;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    padding-right: 30px;
+    font-size: 1.1em;
+    color: #05204A;
 }
 
 .classic p, .variation p {
-    margin: 0px;
+    margin: 2px;
+}
+
+.classic-wrapper {
+    margin-top: 25px;
 }
 
 .classic:hover, .variation:hover {
     cursor: pointer;
+    background-color: #E8E9EB;
+}
+
+.classic:active, .variation:active {
+    background-color: #D3D4D6;
 }
 
 .classic-title, .variation-title {
-    font-size: 1.3em;
+    font-size: 1.4em;
     font-weight: 700;
 }
 
