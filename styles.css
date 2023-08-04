@@ -7,7 +7,6 @@ body {
     display: flex;
     justify-content: center;
     height: 100vh;
-    background-color: #3C5F5F;
 }
 
 main {
@@ -15,12 +14,13 @@ main {
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
-    background-color: #81A59C;
-    
 }
 
 aside {
-    width: 30%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 15%;
 }
 
 .player-container,
@@ -30,8 +30,22 @@ aside {
     flex-direction: column;
     align-items: center;
     background-color: #DEDFE1;
-    border: 2px solid #C0C1C3;
     border-radius: 10px;
+    color: #05204A;
+    margin-top: 200px;
+    height: 300px;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.player-container {
+    margin-left: 20px;
+    margin-right: 30px;
+}
+
+.computer-container {
+    margin-left: 30px;
+    margin-right: 20px;
 }
 
 .player-figure,
@@ -49,14 +63,16 @@ aside {
 .button-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: 30%;
+    margin-top: 50%;
 }
 
 .change-game {
-    font-size: 1em;
+    font-size: 1.3em;
     padding: 5%;
+    margin-right: 5px;
+    color: #05204A;
     background-color: #DEDFE1;
-    border: 2px solid #C0C1C3;
+    border: none;
     border-radius: 10px;
 }
 
@@ -77,9 +93,9 @@ aside {
 }
 
 .title {
-    font-size: 75px;
+    font-size: 6em;
     text-align: center;
-    margin: auto;
+    margin: 60px;
     color: #F3F6F4;
     text-shadow: 
     -2px -1px 0 #05204A,
@@ -90,8 +106,8 @@ aside {
 }
 
 .result {
-    font-size: 25px;
-    margin: 20px;
+    font-size: 2em;
+    margin: auto;
     color: #F3F6F4;
 }
 
@@ -109,7 +125,6 @@ aside {
     height: 40%;
     width: 60%;
     background-color: #DEDFE1;
-    border: 1px solid #C0C1C3;
     border-radius: 10px;
 }
 
@@ -120,7 +135,6 @@ aside {
     height: 40%;
     width: 80%;
     background-color: #DEDFE1;
-    border: 2px solid #C0C1C3;
     border-radius: 10px;
 }
 
@@ -137,8 +151,8 @@ aside {
 }
 
 body, main {
-    background: linear-gradient(-60deg, #386FA4, #417DB1, #59A5D8, #84D2F6);
-    background-size: 400% 400%;
+    background: linear-gradient(-45deg, #386FA4, #417DB1, #59A5D8, #84D2F6);
+    background-size: 300% 300%;
     animation: gradient 15s ease infinite;
     height: 100vh;
 }
