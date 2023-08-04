@@ -1,5 +1,5 @@
 * {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     font-family: 'Fira Sans', sans-serif;
 }
 
@@ -29,7 +29,9 @@ aside {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background-color: #B9C9BB;
+    background-color: #DEDFE1;
+    border: 2px solid #C0C1C3;
+    border-radius: 10px;
 }
 
 .player-figure,
@@ -55,7 +57,7 @@ aside {
     padding: 5%;
     background-color: #DEDFE1;
     border: 2px solid #C0C1C3;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .change-game:hover {
@@ -75,14 +77,21 @@ aside {
 }
 
 .title {
-    font-size: 60px;
+    font-size: 75px;
+    text-align: center;
     margin: auto;
     color: #F3F6F4;
+    text-shadow: 
+    -2px -1px 0 #05204A,
+    -3px -2px 0 #05204A,
+    -4px -3px 0 #05204A,
+    -5px -4px 0 #05204A,
+    -6px -5px 0 #05204A
 }
 
 .result {
-    font-size: 20px;
-    margin: auto;
+    font-size: 25px;
+    margin: 20px;
     color: #F3F6F4;
 }
 
@@ -99,8 +108,9 @@ aside {
     justify-content: center;
     height: 40%;
     width: 60%;
-    background-color: #588B8B;
-    border: 2px solid #3C5F5F;
+    background-color: #DEDFE1;
+    border: 1px solid #C0C1C3;
+    border-radius: 10px;
 }
 
 .choose {
@@ -109,8 +119,9 @@ aside {
     align-items: center;
     height: 40%;
     width: 80%;
-    background-color: #588B8B;
-    border: 2px solid #3C5F5F;
+    background-color: #DEDFE1;
+    border: 2px solid #C0C1C3;
+    border-radius: 10px;
 }
 
 .token {
