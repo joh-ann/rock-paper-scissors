@@ -11,8 +11,13 @@ var intro = document.querySelector(".intro");
 var choose = document.querySelector(".choose");
 var main = document.querySelector("main");
 
-// Event Listeners
+// Buttons
+var rock = document.querySelector("#rock");
+var paper = document.querySelector("#paper");
+var scissors = document.querySelector("#scissors");
 
+// Event Listeners
+main.addEventListener('click', getChoice)
 
 // Global Variables
 
@@ -20,15 +25,6 @@ var gameData = {
     playerScore: 0,
     computerScore: 0
 }
-
-// getChoice function
-var human = createPlayer('Human', 'Rock')
-var computer = createPlayer('Computer', 'Scissors')
-
-// variables for tokens?
-// var rock = 
-// var paper =
-// var scissors = 
 
 // Game logic:
 // Rock beats Scissors
@@ -64,41 +60,40 @@ function createGame(human, computer) {
     return game
 }
 
-// get game instance
-var game = createGame(human, computer)
-
 // pass in game
 // check for draw
 // check win conditions
 // update isWinner value
 // return status (maybe another function)
 
-function getResult(game) {
-    if (game.human.choice === game.computer.choice) {
-        return `DRAW! You both chose ${game.human.choice}.`// updateStatus(draw)
+function getResult(game, choice) {
+    if (choice === game.computer.choice) {
+        return `DRAW! You both chose ${choice}.`// updateStatus(draw)
     }
-    else if (game.human.choice === 'Rock' && game.computer.choice === 'Scissors') {
+    else if (choice === 'Rock' && game.computer.choice === 'Scissors') {
         game.human.isWinner = true
         return `You win! Rock beats Scissors.` // updateStatus(win)
     }
-    else if (game.human.choice === 'Paper' && game.computer.choice === 'Rock') {
+    else if (choice === 'Paper' && game.computer.choice === 'Rock') {
         game.human.isWinner = true
         return `You win! Paper beats Rock.` // updateStatus(win)
     }
-    else if (game.human.choice === 'Scissors' && game.computer.choice === 'Paper') {
+    else if (choice === 'Scissors' && game.computer.choice === 'Paper') {
         game.human.isWinner = true
         return `You win! Scissors beats paper.` // updateStatus(win)
     } else {
-        return `You lose. ${game.computer.choice} beats ${game.human.choice}.`
+        game.computer.isWinner = true
+        return `You lose. ${game.computer.choice} beats ${choice}.`
     }
 }
 
 // update score and status
 function updateScore(game) {
-    if (game.human.isWinner === true) {
+    if (game.human.isWinner === true && game.computer.isWinner === false) {
         gameData.playerScore += 1
         return game
-    } else if (game.computer.isWinner === false) {
+    }
+    if (game.human.isWinner === false && game.computer.isWinner === true) {
         gameData.computerScore += 1
         return game
     }
@@ -109,4 +104,16 @@ function resetGame(game) {
     game.human.isWinner = false
     game.computer.isWinner = false
     return game
+}
+
+function getChoice(event) {
+    var choice = event.target.getAttribute("id")
+    if (choice) {
+        human = createPlayer('Human', choice)
+        computer = createPlayer('Computer', 'Paper')
+        var game = createGame(human, computer)
+        console.log(getResult(game, choice))
+        updateScore(game)
+        resetGame(game)
+    }
 }
