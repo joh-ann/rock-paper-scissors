@@ -17,9 +17,17 @@ var paper = document.querySelector("#paper");
 var scissors = document.querySelector("#scissors");
 
 // Event Listeners
-main.addEventListener('click', getChoice)
-
-// Global Variables
+choose.addEventListener('click', getChoice)
+intro.addEventListener('click', function(event) {
+    if (event.target.classList.contains("classic")) {
+        console.log('classic')
+        chooseClassic(event)
+    }
+    if (event.target.classList.contains("variation")) {
+        console.log('variation')
+        chooseVariation(event)
+    }
+})
 
 var gameData = {
     playerScore: 0,
@@ -162,4 +170,11 @@ function updateWins(winner) {
         playerScore.style.color = 'black'
     }
 }
-    
+
+function chooseClassic(event) {
+    intro.classList.add("hidden")
+}
+
+function chooseVariation(event) {
+    intro.classList.add("hidden")
+}

@@ -122,11 +122,48 @@ aside {
 
 .intro {
     display: flex;
-    justify-content: center;
-    height: 40%;
-    width: 60%;
-    background-color: #DEDFE1;
+    justify-content: space-evenly;
+    width: 80%;
     border-radius: 10px;
+}
+
+#classic-btn, #variation-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #DEDFE1;
+    border: none;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    padding-right: 30px;
+    font-size: 1.1em;
+    color: #05204A;
+}
+
+.classic-wrapper, .variation-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.classic-wrapper {
+    margin-top: 25px;    
+}
+
+.classic:hover, .variation:hover {
+    cursor: pointer;
+    background-color: #E8E9EB;
+}
+
+.classic:active, .variation:active {
+    background-color: #D3D4D6;
+}
+
+.classic-title, .variation-title {
+    font-size: 1.3em;
+    font-weight: 700;
 }
 
 .choose {
@@ -170,4 +207,8 @@ body, main {
     100% {
         background-position: 0% 50%;
     }
+}
+
+.hidden {
+    display: none;
 }
