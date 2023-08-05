@@ -65,9 +65,9 @@ function createGame(human, computer) {
 }
 
 function getResult(game, choice, compChoice) {
-    var resDraw = `<strong>It's a DRAW!</strong> You both chose ${choice}.`
+    var resDraw = `<strong>It's a DRAW.</strong> You both chose ${choice}.`
     var resWin = `<strong>You WIN!</strong> Computer chose ${compChoice}.`
-    var resLoss = `<strong>You LOSE!</strong> Computer chose ${compChoice}.`
+    var resLoss = `<strong>You LOSE.</strong> Computer chose ${compChoice}.`
 
     if (choice === compChoice) {
         updateStatus(resDraw);
