@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Variables
 var buttonsDisabled = false;
+var currentMode = ""
 
 // Query Selectors
 var playerScore = document.querySelector(".player-score");
@@ -22,19 +23,15 @@ var fish = document.querySelector("#Fish");
 var alien = document.querySelector("#Alien");
 
 // Event Listeners
-choose.addEventListener('click', function(event) {
-    if (event.target.classList.contains("classic-btn")) {
-        getChoice(event);
-    } else if (event.target.classList.contains("variation")) {
-        getChoiceVariation(event);
-    }
-});
+choose.addEventListener('click', getChoice);
 intro.addEventListener('click', function(event) {
     if (event.target.classList.contains("classic")) {
+        currentMode = "classic"
         chooseClassic(event);
         updateStatus('Choose your fighter!');
     }
     if (event.target.classList.contains("variation")) {
+        currentMode = "variation"
         chooseVariation(event);
         updateStatus('Choose your figther!');
     }
@@ -150,7 +147,11 @@ function getChoice(event) {
 
             setTimeout(function() {
                 updateStatus(`Choose your fighter!`);
-                showClassicTokens();
+                if (currentMode === "classic") {
+                    showClassicTokens();
+                } else if (currentMode === "variation") {
+                    showAllTokens();
+                }
             }, 2000);
         }, 2000);
     }
