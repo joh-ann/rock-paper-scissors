@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Variables
 var buttonsDisabled = false;
+var currentMode = ""
 
 // Query Selectors
 var playerScore = document.querySelector(".player-score");
@@ -18,19 +19,23 @@ var main = document.querySelector("main");
 var rock = document.querySelector("#Rock");
 var paper = document.querySelector("#Paper");
 var scissors = document.querySelector("#Scissors");
+var fish = document.querySelector("#Fish");
+var alien = document.querySelector("#Alien");
 
 // Event Listeners
 choose.addEventListener('click', getChoice);
 intro.addEventListener('click', function(event) {
     if (event.target.classList.contains("classic")) {
+        currentMode = "classic"
         chooseClassic(event);
         updateStatus('Choose your fighter!');
     }
     if (event.target.classList.contains("variation")) {
+        currentMode = "variation"
         chooseVariation(event);
         updateStatus('Choose your figther!');
     }
-})
+});
 changeGameBtn.addEventListener('click', changeGame);
 
 // Data Model
@@ -69,23 +74,53 @@ function getResult(game, choice, compChoice) {
     var resWin = `<strong>You WIN!</strong> Computer chose ${compChoice}.`
     var resLoss = `<strong>You LOSE.</strong> Computer chose ${compChoice}.`
 
-    if (choice === compChoice) {
-        updateStatus(resDraw);
+    if (currentMode === "classic") {
+        if (choice === compChoice) {
+            updateStatus(resDraw);
+        }
+        else if (choice === 'Rock' && compChoice === 'Scissors') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        }
+        else if (choice === 'Paper' && compChoice === 'Rock') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        }
+        else if (choice === 'Scissors' && compChoice === 'Rock') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        } else {
+            game.computer.isWinner = true
+            updateStatus(resLoss);
+        }
     }
-    else if (choice === 'Rock' && compChoice === 'Scissors') {
-        game.human.isWinner = true
-        updateStatus(resWin);
-    }
-    else if (choice === 'Paper' && compChoice === 'Rock') {
-        game.human.isWinner = true
-        updateStatus(resWin);
-    }
-    else if (choice === 'Scissors' && compChoice === 'Paper') {
-        game.human.isWinner = true
-        updateStatus(resWin);
-    } else {
-        game.computer.isWinner = true
-        updateStatus(resLoss);
+    if (currentMode === "variation") {
+        if (choice === compChoice) {
+            updateStatus(resDraw);
+        }
+        else if (choice === 'Rock' && compChoice === 'Scissors' || compChoice === 'Fish') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        }
+        else if (choice === 'Paper' && compChoice === 'Rock' || compChoice === 'Alien') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        }
+        else if (choice === 'Scissors' && compChoice === 'Paper' || compChoice === 'Fish') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        }
+        else if (choice === 'Fish' && compChoice === 'Paper' || compChoice === 'Alien') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        }
+        else if (choice === 'Alien' && compChoice === 'Scissors' || compChoice === 'Rock') {
+            game.human.isWinner = true
+            updateStatus(resWin);            
+        } else {
+            game.computer.isWinner = true
+            updateStatus(resLoss);
+        }
     }
 }
 
@@ -142,7 +177,11 @@ function getChoice(event) {
 
             setTimeout(function() {
                 updateStatus(`Choose your fighter!`);
-                showAllTokens();
+                if (currentMode === "classic") {
+                    showClassicTokens();
+                } else if (currentMode === "variation") {
+                    showAllTokens();
+                }
             }, 2000);
         }, 2000);
     }
@@ -176,6 +215,8 @@ function updateWins(winner) {
 function chooseClassic() {
     intro.classList.add("hidden");
     choose.classList.remove("hidden");
+    fish.classList.add("hidden");
+    alien.classList.add("hidden");
 }
 
 function chooseVariation() {
@@ -192,6 +233,8 @@ function hideTokens(choice) {
     rock.classList.add("hidden");
     paper.classList.add("hidden");
     scissors.classList.add("hidden");
+    fish.classList.add("hidden");
+    alien.classList.add("hidden");
     document.getElementById(humanToken).classList.remove("hidden");
 }
 
@@ -202,8 +245,16 @@ function displayTokens(choice, compChoice) {
     document.getElementById(compToken).classList.remove("hidden");
 }
 
+function showClassicTokens() {
+    rock.classList.remove("hidden");
+    paper.classList.remove("hidden");
+    scissors.classList.remove("hidden");
+}
+
 function showAllTokens() {
     rock.classList.remove("hidden");
     paper.classList.remove("hidden");
     scissors.classList.remove("hidden");
+    fish.classList.remove("hidden");
+    alien.classList.remove("hidden");
 }
