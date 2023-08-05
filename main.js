@@ -74,29 +74,53 @@ function getResult(game, choice, compChoice) {
     var resWin = `<strong>You WIN!</strong> Computer chose ${compChoice}.`
     var resLoss = `<strong>You LOSE.</strong> Computer chose ${compChoice}.`
 
-    if (choice === compChoice) {
-        updateStatus(resDraw);
+    if (currentMode === "classic") {
+        if (choice === compChoice) {
+            updateStatus(resDraw);
+        }
+        else if (choice === 'Rock' && compChoice === 'Scissors') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        }
+        else if (choice === 'Paper' && compChoice === 'Rock') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        }
+        else if (choice === 'Scissors' && compChoice === 'Rock') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        } else {
+            game.computer.isWinner = true
+            updateStatus(resLoss);
+        }
     }
-    else if (choice === 'Rock' && compChoice === 'Scissors' || 'Fish') {
-        game.human.isWinner = true
-        updateStatus(resWin);
-    }
-    else if (choice === 'Paper' && compChoice === 'Rock' || 'Alien') {
-        game.human.isWinner = true
-        updateStatus(resWin);
-    }
-    else if (choice === 'Scissors' && compChoice === 'Paper' || 'Fish') {
-        game.human.isWinner = true
-        updateStatus(resWin);
-    } else if (choice === 'Fish' && compChoice === 'Paper' || 'Alien') {
-        game.human.isWinner = true
-        updateStatus(resWin);
-    } else if (choice === 'Alien' && compChoice === 'Scissors' || 'Rock') {
-        game.human.isWinner = true
-        updateStatus(resWin);
-    } else {
-        game.computer.isWinner = true
-        updateStatus(resLoss);
+    if (currentMode === "variation") {
+        if (choice === compChoice) {
+            updateStatus(resDraw);
+        }
+        else if (choice === 'Rock' && compChoice === 'Scissors' || compChoice === 'Fish') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        }
+        else if (choice === 'Paper' && compChoice === 'Rock' || compChoice === 'Alien') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        }
+        else if (choice === 'Scissors' && compChoice === 'Paper' || compChoice === 'Fish') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        }
+        else if (choice === 'Fish' && compChoice === 'Paper' || compChoice === 'Alien') {
+            game.human.isWinner = true
+            updateStatus(resWin);
+        }
+        else if (choice === 'Alien' && compChoice === 'Scissors' || compChoice === 'Rock') {
+            game.human.isWinner = true
+            updateStatus(resWin);            
+        } else {
+            game.computer.isWinner = true
+            updateStatus(resLoss);
+        }
     }
 }
 
