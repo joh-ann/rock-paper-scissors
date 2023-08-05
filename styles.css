@@ -1,5 +1,5 @@
 * {
-    /* border: 1px solid green; */
+    border: 1px solid green;
     font-family: 'Fira Sans', sans-serif;
 }
 
@@ -179,16 +179,17 @@ aside {
 .choose {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     background-color: #DEDFE1;
     border: 6px double #05204A;
     border-radius: 10px;
+    margin: 10px;
 }
 
 .token {
     height: 150px;
     width: 150px;
-    margin: 10px;
 }
 
 .token:hover {
