@@ -77,15 +77,21 @@ function getResult(game, choice, compChoice) {
     if (choice === compChoice) {
         updateStatus(resDraw);
     }
-    else if (choice === 'Rock' && compChoice === 'Scissors') {
+    else if (choice === 'Rock' && compChoice === 'Scissors' || 'Fish') {
         game.human.isWinner = true
         updateStatus(resWin);
     }
-    else if (choice === 'Paper' && compChoice === 'Rock') {
+    else if (choice === 'Paper' && compChoice === 'Rock' || 'Alien') {
         game.human.isWinner = true
         updateStatus(resWin);
     }
-    else if (choice === 'Scissors' && compChoice === 'Paper') {
+    else if (choice === 'Scissors' && compChoice === 'Paper' || 'Fish') {
+        game.human.isWinner = true
+        updateStatus(resWin);
+    } else if (choice === 'Fish' && compChoice === 'Paper' || 'Alien') {
+        game.human.isWinner = true
+        updateStatus(resWin);
+    } else if (choice === 'Alien' && compChoice === 'Scissors' || 'Rock') {
         game.human.isWinner = true
         updateStatus(resWin);
     } else {
