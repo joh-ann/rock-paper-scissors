@@ -126,7 +126,7 @@ function getChoice(event) {
         computer = createPlayer('Computer', compChoice);
         var game = createGame(human, computer);
         updateStatus(compMsg);
-        hideTokens();
+        hideTokens(choice);
 
         // Prevent spam clicking
         buttonsDisabled = true; 
@@ -183,10 +183,12 @@ function changeGame() {
     location.reload()
 }
 
-function hideTokens() {
+function hideTokens(choice) {
+    var humanToken = choice;
     rock.classList.add("hidden");
     paper.classList.add("hidden");
     scissors.classList.add("hidden");
+    document.getElementById(humanToken).classList.remove("hidden");
 }
 
 function displayTokens(choice, compChoice) {
