@@ -18,6 +18,8 @@ var main = document.querySelector("main");
 var rock = document.querySelector("#Rock");
 var paper = document.querySelector("#Paper");
 var scissors = document.querySelector("#Scissors");
+var fish = document.querySelector("#Fish");
+var alien = document.querySelector("#Alien");
 
 // Event Listeners
 choose.addEventListener('click', getChoice);
@@ -142,7 +144,7 @@ function getChoice(event) {
 
             setTimeout(function() {
                 updateStatus(`Choose your fighter!`);
-                showAllTokens();
+                showAllTokens()
             }, 2000);
         }, 2000);
     }
@@ -176,6 +178,8 @@ function updateWins(winner) {
 function chooseClassic() {
     intro.classList.add("hidden");
     choose.classList.remove("hidden");
+    fish.classList.add("hidden");
+    alien.classList.add("hidden");
 }
 
 function chooseVariation() {
@@ -192,6 +196,8 @@ function hideTokens(choice) {
     rock.classList.add("hidden");
     paper.classList.add("hidden");
     scissors.classList.add("hidden");
+    fish.classList.add("hidden");
+    alien.classList.add("hidden");
     document.getElementById(humanToken).classList.remove("hidden");
 }
 
@@ -202,8 +208,16 @@ function displayTokens(choice, compChoice) {
     document.getElementById(compToken).classList.remove("hidden");
 }
 
+function showClassicTokens() {
+    rock.classList.remove("hidden");
+    paper.classList.remove("hidden");
+    scissors.classList.remove("hidden");
+}
+
 function showAllTokens() {
     rock.classList.remove("hidden");
     paper.classList.remove("hidden");
     scissors.classList.remove("hidden");
+    fish.classList.remove("hidden");
+    alien.classList.remove("hidden");
 }
