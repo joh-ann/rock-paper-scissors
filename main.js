@@ -15,18 +15,20 @@ var choose = document.querySelector(".choose");
 var main = document.querySelector("main");
 
 // Buttons
-var rock = document.querySelector("#rock");
-var paper = document.querySelector("#paper");
-var scissors = document.querySelector("#scissors");
+var rock = document.querySelector("#Rock");
+var paper = document.querySelector("#Paper");
+var scissors = document.querySelector("#Scissors");
 
 // Event Listeners
 choose.addEventListener('click', getChoice);
 intro.addEventListener('click', function(event) {
     if (event.target.classList.contains("classic")) {
-        chooseClassic(event)
+        chooseClassic(event);
+        updateStatus('Choose your fighter!');
     }
     if (event.target.classList.contains("variation")) {
-        chooseVariation(event)
+        chooseVariation(event);
+        updateStatus('Choose your figther!');
     }
 })
 changeGameBtn.addEventListener('click', changeGame);
@@ -119,24 +121,30 @@ function getChoice(event) {
 
     var choice = event.target.getAttribute("id");
     var compChoice = getComputerChoice();
-    var compMsg = `Computer is deciding...`
 
     if (choice) {
         human = createPlayer('Human', choice);
         computer = createPlayer('Computer', compChoice);
         var game = createGame(human, computer);
-        updateStatus(compMsg)
+        updateStatus(`Computer is deciding...`);
+        hideTokens(choice);
 
         // Prevent spam clicking
         buttonsDisabled = true; 
 
         setTimeout(function() {
             getResult(game, choice, compChoice)
+            displayTokens(choice, compChoice)
             updateScore(game);
             resetGame(game);
             // Re-enable button
             buttonsDisabled = false;
-        }, 2000) // Delay time
+
+            setTimeout(function() {
+                updateStatus(`Choose your fighter!`);
+                showAllTokens();
+            }, 2000);
+        }, 2000);
     }
 }
 
@@ -165,14 +173,37 @@ function updateWins(winner) {
     }
 }
 
-function chooseClassic(event) {
+function chooseClassic() {
     intro.classList.add("hidden");
+    choose.classList.remove("hidden");
 }
 
-function chooseVariation(event) {
+function chooseVariation() {
     intro.classList.add("hidden");
+    choose.classList.remove("hidden");
 }
 
 function changeGame() {
     location.reload()
+}
+
+function hideTokens(choice) {
+    var humanToken = choice;
+    rock.classList.add("hidden");
+    paper.classList.add("hidden");
+    scissors.classList.add("hidden");
+    document.getElementById(humanToken).classList.remove("hidden");
+}
+
+function displayTokens(choice, compChoice) {
+    var humanToken = choice;
+    var compToken = compChoice;
+    document.getElementById(humanToken).classList.remove("hidden");
+    document.getElementById(compToken).classList.remove("hidden");
+}
+
+function showAllTokens() {
+    rock.classList.remove("hidden");
+    paper.classList.remove("hidden");
+    scissors.classList.remove("hidden");
 }
