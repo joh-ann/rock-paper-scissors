@@ -22,7 +22,13 @@ var fish = document.querySelector("#Fish");
 var alien = document.querySelector("#Alien");
 
 // Event Listeners
-choose.addEventListener('click', getChoice);
+choose.addEventListener('click', function(event) {
+    if (event.target.classList.contains("classic-btn")) {
+        getChoice(event);
+    } else if (event.target.classList.contains("variation")) {
+        getChoiceVariation(event);
+    }
+});
 intro.addEventListener('click', function(event) {
     if (event.target.classList.contains("classic")) {
         chooseClassic(event);
@@ -32,7 +38,7 @@ intro.addEventListener('click', function(event) {
         chooseVariation(event);
         updateStatus('Choose your figther!');
     }
-})
+});
 changeGameBtn.addEventListener('click', changeGame);
 
 // Data Model
@@ -144,7 +150,7 @@ function getChoice(event) {
 
             setTimeout(function() {
                 updateStatus(`Choose your fighter!`);
-                showAllTokens()
+                showClassicTokens();
             }, 2000);
         }, 2000);
     }
