@@ -139,7 +139,7 @@ function getChoice(event) {
             // Re-enable button
             buttonsDisabled = false;
 
-            setTimeout(showAllTokens, 2500); // Adjust the delay as needed
+            setTimeout(showAllTokens, 2000); // Adjust the delay as needed
         }, 2000); // Delay time
     }
 }
