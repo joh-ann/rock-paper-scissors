@@ -23,10 +23,12 @@ var scissors = document.querySelector("#Scissors");
 choose.addEventListener('click', getChoice);
 intro.addEventListener('click', function(event) {
     if (event.target.classList.contains("classic")) {
-        chooseClassic(event)
+        chooseClassic(event);
+        updateStatus('Choose your fighter!');
     }
     if (event.target.classList.contains("variation")) {
-        chooseVariation(event)
+        chooseVariation(event);
+        updateStatus('Choose your figther!');
     }
 })
 changeGameBtn.addEventListener('click', changeGame);
@@ -119,13 +121,12 @@ function getChoice(event) {
 
     var choice = event.target.getAttribute("id");
     var compChoice = getComputerChoice();
-    var compMsg = `Computer is deciding...`
 
     if (choice) {
         human = createPlayer('Human', choice);
         computer = createPlayer('Computer', compChoice);
         var game = createGame(human, computer);
-        updateStatus(compMsg);
+        updateStatus(`Computer is deciding...`);
         hideTokens(choice);
 
         // Prevent spam clicking
@@ -139,8 +140,11 @@ function getChoice(event) {
             // Re-enable button
             buttonsDisabled = false;
 
-            setTimeout(showAllTokens, 2000); // Adjust the delay as needed
-        }, 2000); // Delay time
+            setTimeout(function() {
+                updateStatus(`Choose your fighter!`);
+                showAllTokens();
+            }, 2000);
+        }, 2000);
     }
 }
 
@@ -169,12 +173,12 @@ function updateWins(winner) {
     }
 }
 
-function chooseClassic(event) {
+function chooseClassic() {
     intro.classList.add("hidden");
     choose.classList.remove("hidden");
 }
 
-function chooseVariation(event) {
+function chooseVariation() {
     intro.classList.add("hidden");
     choose.classList.remove("hidden");
 }
