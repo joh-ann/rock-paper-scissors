@@ -1,5 +1,4 @@
 * {
-    border: 1px solid green;
     font-family: 'Fira Sans', sans-serif;
 }
 
@@ -111,7 +110,13 @@ aside {
     font-weight: 100;
     margin: auto;
     color: #F3F6F4;
-
+    border: 4px dotted #000046;
+    padding-top: 5px;
+    padding-left: 50px;
+    padding-bottom: 5px;
+    padding-right: 50px;
+    border-radius: 25px;
+    text-align: center;
 }
 
 .main-wrapper { 
@@ -141,7 +146,7 @@ aside {
     border-radius: 10px;
     margin: 10px;
     padding: 20px;
-    font-size: 1em;
+    font-size: 1.2em;
     color: #05204A;
 }
 
@@ -190,6 +195,7 @@ aside {
 .token {
     height: 140px;
     width: 150px;
+    margin: 15px;
 }
 
 .token:hover {
@@ -204,7 +210,7 @@ aside {
 body, main {
     background: linear-gradient(-45deg, #000046, #417DB1, #4286C2, #386FA4);
     background-size: 400% 400%;
-    animation: gradient 25s ease infinite;
+    animation: gradient 15s ease infinite;
     height: 100vh;
 }
 

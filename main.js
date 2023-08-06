@@ -2,49 +2,49 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-// Variables
-var buttonsDisabled = false;
-var currentMode = ""
-
-// Query Selectors
+// QUERY SELECTORS
 var playerScore = document.querySelector(".player-score");
 var computerScore = document.querySelector(".computer-score");
 var resultMsg = document.querySelector(".result");
 var changeGameBtn = document.querySelector(".change-game");
 var intro = document.querySelector(".intro");
 var choose = document.querySelector(".choose");
-var main = document.querySelector("main");
 
-// Buttons
+// TOKENS
 var rock = document.querySelector("#Rock");
 var paper = document.querySelector("#Paper");
 var scissors = document.querySelector("#Scissors");
 var fish = document.querySelector("#Fish");
 var alien = document.querySelector("#Alien");
 
-// Event Listeners
+// EVENT LISTENERS
 choose.addEventListener('click', getChoice);
 intro.addEventListener('click', function(event) {
     if (event.target.classList.contains("classic")) {
         currentMode = "classic"
         chooseClassic(event);
-        updateStatus('Choose your fighter!');
+        updateStatus('Classic: Choose your fighter!');
     }
     if (event.target.classList.contains("variation")) {
         currentMode = "variation"
         chooseVariation(event);
-        updateStatus('Choose your fighter!');
+        updateStatus('Variation: Choose your fighter!');
     }
 });
 changeGameBtn.addEventListener('click', changeGame);
 
-// Data Model
+
+// VARIABLES
+var buttonsDisabled = false;
+var currentMode = ""
+
+// DATA MODEL
 var gameData = {
     playerScore: 0,
     computerScore: 0
 }
 
-// Functions
+// FUNCTIONS
 function createPlayer(name, choice) {
     var player = {
         name: name,
@@ -70,10 +70,12 @@ function createGame(human, computer) {
 }
 
 function getResult(game, choice, compChoice) {
+    // Result messages
     var resDraw = `<strong>It's a DRAW.</strong> You both chose ${choice}.`
     var resWin = `<strong>You WIN!</strong> Computer chose ${compChoice}.`
     var resLoss = `<strong>You LOSE.</strong> Computer chose ${compChoice}.`
 
+    // Classic mode
     if (currentMode === "classic") {
         if (choice === compChoice) {
             updateStatus(resDraw);
@@ -94,6 +96,7 @@ function getResult(game, choice, compChoice) {
             updateStatus(resLoss);
         }
     }
+    // Variation mode
     if (currentMode === "variation") {
         if (choice === compChoice) {
             updateStatus(resDraw);
@@ -155,25 +158,21 @@ function getChoice(event) {
     }
 
     var choice = event.target.getAttribute("id");
-    if (currentMode === "classic") {
-        var compChoice = getComputerChoice();
-    } else if (currentMode === "variation") {
-        var compChoice = getComputerChoiceVariation();
-    }
+    var compChoice = getComputerChoice();
 
     if (choice) {
         human = createPlayer('Human', choice);
         computer = createPlayer('Computer', compChoice);
         var game = createGame(human, computer);
+
         updateStatus(`Computer is deciding...`);
         hideTokens(choice);
-
         // Prevent spam clicking
         buttonsDisabled = true; 
 
         setTimeout(function() {
             getResult(game, choice, compChoice)
-            displayTokens(choice, compChoice)
+            tokenFight(choice, compChoice)
             updateScore(game);
             resetGame(game);
             // Re-enable button
@@ -181,29 +180,23 @@ function getChoice(event) {
 
             setTimeout(function() {
                 updateStatus(`Choose your fighter!`);
-                if (currentMode === "classic") {
-                    showClassicTokens();
-                } else if (currentMode === "variation") {
-                    showAllTokens();
-                }
+                displayTokens();
             }, 2000);
         }, 2000);
     }
 }
 
-function getComputerChoice() {
-    var rps = ["Rock", "Paper", "Scissors"];
-    var randomIndex = Math.floor(Math.random() * rps.length);
-    var compChoice = rps[randomIndex];
-    // console.log(compChoice)
-    return compChoice;
-}
+function getComputerChoice(mode) {
+    var classicMode = ["Rock", "Paper", "Scissors"];
+    var variationMode = ["Rock", "Paper", "Scissors", "Fish", "Alien"];
 
-function getComputerChoiceVariation() {
-    var rpsVar = ["Rock", "Paper", "Scissors", "Fish", "Alien"];
-    var randomIndex = Math.floor(Math.random() * rpsVar.length);
-    var compChoice = rpsVar[randomIndex];
-    // console.log(compChoice)
+    if (currentMode === "classic") {
+        mode = classicMode;
+    } else if (currentMode === "variation") {
+        mode = variationMode;
+    }
+    var randomIndex = Math.floor(Math.random() * mode.length);
+    var compChoice = mode[randomIndex];
     return compChoice;
 }
 
@@ -250,23 +243,24 @@ function hideTokens(choice) {
     document.getElementById(humanToken).classList.remove("hidden");
 }
 
-function displayTokens(choice, compChoice) {
+function tokenFight(choice, compChoice) {
     var humanToken = choice;
     var compToken = compChoice;
     document.getElementById(humanToken).classList.remove("hidden");
     document.getElementById(compToken).classList.remove("hidden");
 }
 
-function showClassicTokens() {
-    rock.classList.remove("hidden");
-    paper.classList.remove("hidden");
-    scissors.classList.remove("hidden");
-}
-
-function showAllTokens() {
-    rock.classList.remove("hidden");
-    paper.classList.remove("hidden");
-    scissors.classList.remove("hidden");
-    fish.classList.remove("hidden");
-    alien.classList.remove("hidden");
+function displayTokens() {
+    if (currentMode === "classic") {
+        rock.classList.remove("hidden");
+        paper.classList.remove("hidden");
+        scissors.classList.remove("hidden");
+    }
+    if (currentMode === "variation") {
+        rock.classList.remove("hidden");
+        paper.classList.remove("hidden");
+        scissors.classList.remove("hidden");
+        fish.classList.remove("hidden");
+        alien.classList.remove("hidden");
+    }
 }
