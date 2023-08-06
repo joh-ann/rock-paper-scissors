@@ -26,6 +26,7 @@ This is the final solo project for Mod 1 of Turing School. Students were given o
 - Successfully completed the project with the required features.
 - Transformed initial planned wireframe into a fully functional product.
 - Built the project from scratch, seeing it go from simple console.log statements to an interface.
+- Enhancing the interface and making it compatible with various viewport dimensions.
 
 ## Challenges:
 - Building the project from scratch, considering the Data Model and Logic.
