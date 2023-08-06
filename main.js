@@ -86,7 +86,7 @@ function getResult(game, choice, compChoice) {
             game.human.isWinner = true
             updateStatus(resWin);
         }
-        else if (choice === 'Scissors' && compChoice === 'Rock') {
+        else if (choice === 'Scissors' && compChoice === 'Paper') {
             game.human.isWinner = true
             updateStatus(resWin);
         } else {
@@ -155,7 +155,11 @@ function getChoice(event) {
     }
 
     var choice = event.target.getAttribute("id");
-    var compChoice = getComputerChoice();
+    if (currentMode === "classic") {
+        var compChoice = getComputerChoice();
+    } else if (currentMode === "variation") {
+        var compChoice = getComputerChoiceVariation();
+    }
 
     if (choice) {
         human = createPlayer('Human', choice);
@@ -191,6 +195,14 @@ function getComputerChoice() {
     var rps = ["Rock", "Paper", "Scissors"];
     var randomIndex = Math.floor(Math.random() * rps.length);
     var compChoice = rps[randomIndex];
+    // console.log(compChoice)
+    return compChoice;
+}
+
+function getComputerChoiceVariation() {
+    var rpsVar = ["Rock", "Paper", "Scissors", "Fish", "Alien"];
+    var randomIndex = Math.floor(Math.random() * rpsVar.length);
+    var compChoice = rpsVar[randomIndex];
     // console.log(compChoice)
     return compChoice;
 }
