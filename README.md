@@ -4,7 +4,7 @@
 Challenge the computer in Rock, Paper, Scissors! Play classic mode or dive into an exciting variation. Experience the timeless game with a fresh twist for added fun and challenge.
 
 ### Installation Instructions:
-1. Navigate to [GitHub Pages Link](https://joh-ann.github.io/rps-solo/)
+1. View on [GitHub Pages](https://joh-ann.github.io/rps-solo/)
 2. Enjoy!
 
 ## Preview of App:
