@@ -246,9 +246,11 @@ function hideTokens(choice) {
 function tokenFight(choice, compChoice) {
     var humanToken = choice;
     var compToken = compChoice;
-    document.getElementById(humanToken).classList.remove("hidden");
-    document.getElementById(compToken).classList.remove("hidden");
+    choose.innerHTML = `<img src="assets/${humanToken}.png" alt="${humanToken}" class="token" id="${humanToken}">`
+    choose.innerHTML += `<img src="assets/${compToken}.png" alt="${compToken}" class="token" id="${compToken}">`
 }
+    // document.getElementById(humanToken).classList.remove("hidden");
+    // document.getElementById(compToken).classList.remove("hidden");
 
 function displayTokens() {
     if (currentMode === "classic") {
