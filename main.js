@@ -254,15 +254,16 @@ function tokenFight(choice, compChoice) {
 function displayTokens() {
     choose.innerHTML = ``;
     if (currentMode === "classic") {
-        choose.innerHTML += `<img src="assets/Rock.png" alt="Rock" class="token" id="Rock">`
-        choose.innerHTML += `<img src="assets/Paper.png" alt="Paper" class="token" id="Paper">`
-        choose.innerHTML += `<img src="assets/Scissors.png" alt="Scissors" class="token" id="Scissors">`
+        choose.innerHTML = 
+        `<img src="assets/Rock.png" alt="Rock" class="token" id="Rock">
+        <img src="assets/Paper.png" alt="Paper" class="token" id="Paper">
+        <img src="assets/Scissors.png" alt="Scissors" class="token" id="Scissors">`
     }
     if (currentMode === "variation") {
-        choose.innerHTML += `<img src="assets/Rock.png" alt="Rock" class="token" id="Rock">`
-        choose.innerHTML += `<img src="assets/Paper.png" alt="Paper" class="token" id="Paper">`
-        choose.innerHTML += `<img src="assets/Scissors.png" alt="Scissors" class="token" id="Scissors">`
-        choose.innerHTML += `<img src="assets/Fish.png" alt="Fish" class="token" id="Fish">`
-        choose.innerHTML += `<img src="assets/Alien.png" alt="Alien" class="token" id="Alien">`
+        choose.innerHTML = `<img src="assets/Rock.png" alt="Rock" class="token" id="Rock">
+        <img src="assets/Paper.png" alt="Paper" class="token" id="Paper">
+        <img src="assets/Scissors.png" alt="Scissors" class="token" id="Scissors">
+        <img src="assets/Fish.png" alt="Fish" class="token" id="Fish">
+        <img src="assets/Alien.png" alt="Alien" class="token" id="Alien">`
     }
 }
