@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-
+    hideChangeGameBtn();
 });
 
 // QUERY SELECTORS
@@ -175,6 +175,7 @@ function getChoice(event) {
             tokenFight(choice, compChoice)
             updateScore(game);
             resetGame(game);
+            displayChangeGameBtn();
             // Re-enable button
             buttonsDisabled = false;
 
@@ -201,7 +202,7 @@ function getComputerChoice() {
 }
 
 function updateStatus(result) {
-    resultMsg.innerHTML = result
+    resultMsg.innerHTML = result;
 }
 
 function updateWins(winner) {
@@ -230,7 +231,15 @@ function chooseVariation() {
 }
 
 function changeGame() {
-    location.reload()
+    location.reload();
+}
+
+function hideChangeGameBtn() {
+    changeGameBtn.classList.add("hidden");
+}
+
+function displayChangeGameBtn() {
+    changeGameBtn.classList.remove("hidden");
 }
 
 function hideTokens(choice) {
