@@ -176,12 +176,12 @@ function getChoice(event) {
             updateScore(game);
             resetGame(game);
             displayChangeGameBtn();
-            // Re-enable button
-            buttonsDisabled = false;
 
             setTimeout(function() {
                 updateStatus(`Choose your fighter!`);
                 displayTokens();
+                // Re-enable button                
+                buttonsDisabled = false;
             }, 2000);
         }, 2000);
     }
