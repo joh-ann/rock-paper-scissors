@@ -219,15 +219,16 @@ function updateWins(winner) {
 }
 
 function chooseClassic() {
-    intro.classList.add("hidden");
-    choose.classList.remove("hidden");
-    fish.classList.add("hidden");
-    alien.classList.add("hidden");
+    hideElement(intro);
+    hideElement(fish);
+    hideElement(alien);
+    showElement(choose);
+
 }
 
 function chooseVariation() {
-    intro.classList.add("hidden");
-    choose.classList.remove("hidden");
+    hideElement(intro);
+    showElement(choose);
 }
 
 function changeGame() {
@@ -235,11 +236,11 @@ function changeGame() {
 }
 
 function hideChangeGameBtn() {
-    changeGameBtn.classList.add("hidden");
+    hideElement(changeGameBtn);
 }
 
 function displayChangeGameBtn() {
-    changeGameBtn.classList.remove("hidden");
+    showElement(changeGameBtn);
 }
 
 function hideTokens(choice) {
@@ -266,4 +267,12 @@ function displayTokens() {
         <img src="assets/Fish.png" alt="Fish" class="token" id="Fish">
         <img src="assets/Alien.png" alt="Alien" class="token" id="Alien">`
     }
+}
+
+function showElement(element) {
+    element.classList.remove("hidden");
+}
+
+function hideElement(element) {
+    element.classList.add("hidden");
 }
