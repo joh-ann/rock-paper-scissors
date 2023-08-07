@@ -19,18 +19,7 @@ var alien = document.querySelector("#Alien");
 
 // EVENT LISTENERS
 choose.addEventListener('click', getChoice);
-intro.addEventListener('click', function(event) {
-    if (event.target.classList.contains("classic")) {
-        currentMode = "classic"
-        chooseClassic(event);
-        updateStatus('Classic: Choose your fighter!');
-    }
-    if (event.target.classList.contains("variation")) {
-        currentMode = "variation"
-        chooseVariation(event);
-        updateStatus('Variation: Choose your fighter!');
-    }
-});
+intro.addEventListener('click', handleGameMode);
 changeGameBtn.addEventListener('click', changeGame);
 
 
@@ -67,6 +56,19 @@ function createGame(human, computer) {
         }
     }
     return game;
+}
+
+function handleGameMode(event) {
+    if (event.target.classList.contains("classic")) {
+        currentMode = "classic"
+        chooseClassic(event);
+        updateStatus('Classic: Choose your fighter!');
+    }
+    if (event.target.classList.contains("variation")) {
+        currentMode = "variation"
+        chooseVariation(event);
+        updateStatus('Variation: Choose your fighter!');
+    }
 }
 
 function getResult(game, choice, compChoice) {
