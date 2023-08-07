@@ -186,7 +186,7 @@ function getChoice(event) {
     }
 }
 
-function getComputerChoice(mode) {
+function getComputerChoice() {
     var classicMode = ["Rock", "Paper", "Scissors"];
     var variationMode = ["Rock", "Paper", "Scissors", "Fish", "Alien"];
 
@@ -234,33 +234,26 @@ function changeGame() {
 }
 
 function hideTokens(choice) {
-    var humanToken = choice;
-    rock.classList.add("hidden");
-    paper.classList.add("hidden");
-    scissors.classList.add("hidden");
-    fish.classList.add("hidden");
-    alien.classList.add("hidden");
-    document.getElementById(humanToken).classList.remove("hidden");
+    choose.innerHTML = `<img src="assets/${choice}.png" alt="${choice}" class="token" id="${choice}">`
 }
 
 function tokenFight(choice, compChoice) {
-    var humanToken = choice;
-    var compToken = compChoice;
-    document.getElementById(humanToken).classList.remove("hidden");
-    document.getElementById(compToken).classList.remove("hidden");
+    choose.innerHTML = `<img src="assets/${choice}.png" alt="${choice}" class="token" id="${choice}">`
+    choose.innerHTML += `<img src="assets/${compChoice}.png" alt="${compChoice}" class="token" id="${compChoice}">`
 }
 
 function displayTokens() {
+    choose.innerHTML = ``;
     if (currentMode === "classic") {
-        rock.classList.remove("hidden");
-        paper.classList.remove("hidden");
-        scissors.classList.remove("hidden");
+        choose.innerHTML += `<img src="assets/Rock.png" alt="Rock" class="token" id="Rock">`
+        choose.innerHTML += `<img src="assets/Paper.png" alt="Paper" class="token" id="Paper">`
+        choose.innerHTML += `<img src="assets/Scissors.png" alt="Scissors" class="token" id="Scissors">`
     }
     if (currentMode === "variation") {
-        rock.classList.remove("hidden");
-        paper.classList.remove("hidden");
-        scissors.classList.remove("hidden");
-        fish.classList.remove("hidden");
-        alien.classList.remove("hidden");
+        choose.innerHTML += `<img src="assets/Rock.png" alt="Rock" class="token" id="Rock">`
+        choose.innerHTML += `<img src="assets/Paper.png" alt="Paper" class="token" id="Paper">`
+        choose.innerHTML += `<img src="assets/Scissors.png" alt="Scissors" class="token" id="Scissors">`
+        choose.innerHTML += `<img src="assets/Fish.png" alt="Fish" class="token" id="Fish">`
+        choose.innerHTML += `<img src="assets/Alien.png" alt="Alien" class="token" id="Alien">`
     }
 }
