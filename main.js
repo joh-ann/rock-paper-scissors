@@ -232,7 +232,8 @@ function chooseVariation() {
 }
 
 function changeGame() {
-    location.reload();
+    showElement(intro);
+    hideElement(choose);
 }
 
 function hideChangeGameBtn() {
