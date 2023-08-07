@@ -27,7 +27,9 @@ This is the final solo project for Mod 1 of Turing School. Students were given o
 - Transformed initial planned wireframe into a fully functional product.
 - Built the project from scratch, seeing it go from simple console.log statements to an interface.
 - Enhancing the interface and making it compatible with various viewport dimensions.
+- Using my resources for custom token images! (Thanks Carman!)
 
 ## Challenges:
 - Building the project from scratch, considering the Data Model and Logic.
 - Refactoring the code.
+- Displaying the tokens in order based on player choice.
