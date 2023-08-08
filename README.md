@@ -1,4 +1,4 @@
-![rps](https://github.com/joh-ann/rps-solo/assets/126308696/d18d44e2-9f73-416f-b2d7-cea3621d5895)# Rock, Paper, Scissors
+# Rock, Paper, Scissors
 
 ### Abstract:
 Challenge the computer in Rock, Paper, Scissors! Play classic mode or dive into an exciting variation. Experience the timeless game with a fresh twist for added fun and challenge.
