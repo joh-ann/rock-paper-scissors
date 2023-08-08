@@ -18,14 +18,21 @@ var fish = document.querySelector("#Fish");
 var alien = document.querySelector("#Alien");
 
 // EVENT LISTENERS
-choose.addEventListener('click', getChoice);
+choose.addEventListener('click', function(event) {
+    var clickedToken = event.target;
+
+    // Check if token
+    if (clickedToken.classList.contains("token")) {
+        getChoice(event);
+    }
+});
 intro.addEventListener('click', handleGameMode);
 changeGameBtn.addEventListener('click', changeGame);
 
 
 // VARIABLES
 var buttonsDisabled = false;
-var currentMode = ""
+var currentMode = "";
 
 // DATA MODEL
 var gameData = {
@@ -43,7 +50,7 @@ function createPlayer(name, choice) {
         name: name,
         choice: choice,
     }
-    return player
+    return player;
 }
 
 function createGame(human, computer) {
