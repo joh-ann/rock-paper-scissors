@@ -71,76 +71,55 @@ function handleGameMode(event) {
     }
 }
 
-function getResult(game, choice, compChoice) {
-    // Result messages
-    var resDraw = `<strong>It's a DRAW.</strong> You both chose ${choice}.`
-    var resWin = `<strong>You WIN!</strong> Computer chose ${compChoice}.`
-    var resLoss = `<strong>You LOSE.</strong> Computer chose ${compChoice}.`
+function getWinner(choice, compChoice) {
+    if (choice === compChoice) {
+        return 'draw';
+    }
 
-    // Classic mode
-    if (currentMode === "classic") {
-        if (choice === compChoice) {
-            updateStatus(resDraw);
-        }
-        else if (choice === 'Rock' && compChoice === 'Scissors') {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        }
-        else if (choice === 'Paper' && compChoice === 'Rock') {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        }
-        else if (choice === 'Scissors' && compChoice === 'Paper') {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        } else {
-            game.computer.isWinner = true
-            updateStatus(resLoss);
+    var winConditions = {
+        classic: {
+            Rock: "Scissors",
+            Paper: "Rock",
+            Scissors: "Paper"
+        },
+        variation: {
+            Rock: ['Scissors', 'Fish'],
+            Paper: ['Rock', 'Alien'],
+            Scissors: ['Paper', 'Fish'],
+            Fish: ['Paper', 'Alien'],
+            Alien: ['Scissors', 'Rock']
         }
     }
-    // Variation mode
-    if (currentMode === "variation") {
-        if (choice === compChoice) {
-            updateStatus(resDraw);
-        }
-        else if ((choice === 'Rock' && (compChoice === 'Scissors' || compChoice === 'Fish'))) {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        }
-        else if ((choice === 'Paper' && (compChoice === 'Rock' || compChoice === 'Alien'))) {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        }
-        else if ((choice === 'Scissors' && (compChoice === 'Paper' || compChoice === 'Fish'))) {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        }
-        else if ((choice === 'Fish' && (compChoice === 'Paper' || compChoice === 'Alien'))) {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        }
-        else if ((choice === 'Alien' && (compChoice === 'Scissors' || compChoice === 'Rock'))) {
-            game.human.isWinner = true
-            updateStatus(resWin);            
-        } else {
-            game.computer.isWinner = true
-            updateStatus(resLoss);
-        }
+
+    if (winConditions[currentMode][choice].includes(compChoice)) {
+        return 'player';
+    } else {
+        return 'computer';
+    }
+}
+
+function getResult(game, choice, compChoice) {
+    var result = getWinner(choice, compChoice);
+
+    if (result === 'draw') {
+        updateStatus(`<strong>It's a DRAW.</strong> You both chose ${choice}.`);
+    } else if (result === 'player') {
+        game.human.isWinner = true;
+        updateStatus(`<strong>You WIN!</strong> Computer chose ${compChoice}.`);
+    } else {
+        game.computer.isWinner = true;
+        updateStatus(`<strong>You LOSE.</strong> Computer chose ${compChoice}.`);
     }
 }
 
 function updateScore(game) {
     if (game.human.isWinner === true && game.computer.isWinner === false) {
-        var human = game.human;
         gameData.playerScore += 1;
-        updateWins(human);
-        return game;
+        updateWins(game.human);
     }
     if (game.human.isWinner === false && game.computer.isWinner === true) {
-        var computer = game.computer;
         gameData.computerScore += 1;
-        updateWins(computer);
-        return game;
+        updateWins(game.computer);
     }
     if (game.human.isWinner === false && game.computer.isWinner === false) {
         playerScore.style.color = 'black';
@@ -161,33 +140,31 @@ function getChoice(event) {
 
     var choice = event.target.getAttribute("id");
     var compChoice = getComputerChoice();
+    var human = createPlayer('Human', choice);
+    var computer = createPlayer('Computer', compChoice);
+    var game = createGame(human, computer);
 
-    if (choice) {
-        human = createPlayer('Human', choice);
-        computer = createPlayer('Computer', compChoice);
-        var game = createGame(human, computer);
+    updateStatus(`Computer is deciding...`);
+    showPlayerToken(choice);
+    // Prevent spam clicking
+    buttonsDisabled = true; 
 
-        updateStatus(`Computer is deciding...`);
-        hideTokens(choice);
-        // Prevent spam clicking
-        buttonsDisabled = true; 
+    setTimeout(function() {
+        getResult(game, choice, compChoice)
+        tokenFight(choice, compChoice)
+        updateScore(game);
+        resetGame(game);
+        displayChangeGameBtn();
 
         setTimeout(function() {
-            getResult(game, choice, compChoice)
-            tokenFight(choice, compChoice)
-            updateScore(game);
-            resetGame(game);
-            displayChangeGameBtn();
-
-            setTimeout(function() {
-                updateStatus(`Choose your fighter!`);
-                displayTokens();
-                // Re-enable button                
-                buttonsDisabled = false;
-            }, 2000);
+            updateStatus(`Choose your fighter!`);
+            displayTokens();
+            // Re-enable button                
+            buttonsDisabled = false;
         }, 2000);
-    }
+    }, 2000);
 }
+
 
 function getComputerChoice() {
     var classicMode = ["Rock", "Paper", "Scissors"];
@@ -246,7 +223,7 @@ function displayChangeGameBtn() {
     showElement(changeGameBtn);
 }
 
-function hideTokens(choice) {
+function showPlayerToken(choice) {
     choose.innerHTML = `<img src="assets/${choice}.png" alt="${choice}" class="token" id="${choice}">`
 }
 
