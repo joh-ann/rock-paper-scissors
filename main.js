@@ -33,6 +33,10 @@ var gameData = {
     computerScore: 0
 }
 
+// GAME MODES
+var classicMode = ["Rock", "Paper", "Scissors"];
+var variationMode = ["Rock", "Paper", "Scissors", "Fish", "Alien"];
+
 // FUNCTIONS
 function createPlayer(name, choice) {
     var player = {
@@ -69,6 +73,7 @@ function handleGameMode(event) {
         chooseVariation(event);
         updateStatus('Variation: Choose your fighter!');
     }
+    displayTokens();
 }
 
 function getWinner(choice, compChoice) {
@@ -176,8 +181,7 @@ function getComputerChoice() {
         mode = variationMode;
     }
     var randomIndex = Math.floor(Math.random() * mode.length);
-    var compChoice = mode[randomIndex];
-    return compChoice;
+    return mode[randomIndex];
 }
 
 function updateStatus(result) {
