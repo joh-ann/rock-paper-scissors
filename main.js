@@ -104,7 +104,7 @@ function getWinner(choice, compChoice) {
     }
 
     if (winConditions[currentMode][choice].includes(compChoice)) {
-        return 'player';
+        return 'human';
     } else {
         return 'computer';
     }
@@ -115,7 +115,7 @@ function getResult(game, choice, compChoice) {
 
     if (result === 'draw') {
         updateStatus(`<strong>It's a DRAW.</strong> You both chose ${choice}.`);
-    } else if (result === 'player') {
+    } else if (result === 'human') {
         game.human.isWinner = true;
         updateStatus(`<strong>You WIN!</strong> Computer chose ${compChoice}.`);
     } else {
@@ -243,7 +243,8 @@ function displayTokens() {
         <img src="assets/Scissors.png" alt="Scissors" class="token" id="Scissors">`
     }
     if (currentMode === "variation") {
-        choose.innerHTML = `<img src="assets/Rock.png" alt="Rock" class="token" id="Rock">
+        choose.innerHTML = 
+        `<img src="assets/Rock.png" alt="Rock" class="token" id="Rock">
         <img src="assets/Paper.png" alt="Paper" class="token" id="Paper">
         <img src="assets/Scissors.png" alt="Scissors" class="token" id="Scissors">
         <img src="assets/Fish.png" alt="Fish" class="token" id="Fish">
