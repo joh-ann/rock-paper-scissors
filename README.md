@@ -1,7 +1,7 @@
 # Rock, Paper, Scissors
 
 ### Abstract:
-Challenge the computer in Rock, Paper, Scissors! Play classic mode or dive into an exciting variation. Experience the timeless game with a fresh twist for added fun and challenge.
+Challenge the computer in Rock, Paper, Scissors! Play classic mode or dive into an exciting variation. Experience the timeless game with a fresh twist for an added challenge.
 
 ### Installation Instructions:
 1. View on [GitHub Pages](https://joh-ann.github.io/rps-solo/)
@@ -30,5 +30,5 @@ This is the final solo project for Mod 1 of Turing School. Students were given o
 
 ## Challenges:
 - Building the project from scratch, considering the Data Model and Logic.
-- Refactoring the code.
+- Refactoring the code to make it more DRY.
 - Displaying the tokens in order based on player choice.
