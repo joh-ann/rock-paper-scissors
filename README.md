@@ -29,6 +29,8 @@ This is the final solo project for Mod 1 of Turing School. Students were given o
 - Using my resources for custom token images! (Thanks Carman!)
 
 ## Challenges:
-- Building the project from scratch, considering the Data Model and Logic.
+- Building the project from scratch
+- Planning out the Data Model and Logic.
 - Refactoring the code to make it more DRY.
 - Displaying the tokens in order based on player choice.
+- Finding a way to stop user from spam clicking tokens.
