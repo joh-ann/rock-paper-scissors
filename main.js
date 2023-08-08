@@ -165,9 +165,6 @@ function getChoice(event) {
 
 
 function getComputerChoice() {
-    var classicMode = ["Rock", "Paper", "Scissors"];
-    var variationMode = ["Rock", "Paper", "Scissors", "Fish", "Alien"];
-
     if (currentMode === "classic") {
         mode = classicMode;
     } else if (currentMode === "variation") {
