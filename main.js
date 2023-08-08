@@ -73,7 +73,7 @@ function handleGameMode(event) {
         chooseVariation(event);
         updateStatus('Variation: Choose your fighter!');
     }
-    displayTokens();
+    displayTokens;
 }
 
 function getWinner(choice, compChoice) {
