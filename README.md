@@ -22,11 +22,11 @@ This is the final solo project for Mod 1 of Turing School. Students were given o
 - Use your problem solving process to break down large problems and solve things step by step.
 
 ## Wins:
-- Successfully completed the project with the required features.
-- Transformed initial planned wireframe into a fully functional product.
-- Built the project from scratch, seeing it go from simple console.log statements to an interface.
+- Successfully completed the project with extra time to work on refactoring.
+- Seeing the project go from a simple wireframe and console.log statements to an functional interface.
 - Enhancing the interface and making it compatible with various viewport dimensions.
 - Using my resources for custom token images! (Thanks Carman!)
+- Refactored code to make it more pure and less repetitive.
 
 ## Challenges:
 - Building the project from scratch
