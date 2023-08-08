@@ -19,18 +19,7 @@ var alien = document.querySelector("#Alien");
 
 // EVENT LISTENERS
 choose.addEventListener('click', getChoice);
-intro.addEventListener('click', function(event) {
-    if (event.target.classList.contains("classic")) {
-        currentMode = "classic"
-        chooseClassic(event);
-        updateStatus('Classic: Choose your fighter!');
-    }
-    if (event.target.classList.contains("variation")) {
-        currentMode = "variation"
-        chooseVariation(event);
-        updateStatus('Variation: Choose your fighter!');
-    }
-});
+intro.addEventListener('click', handleGameMode);
 changeGameBtn.addEventListener('click', changeGame);
 
 
@@ -43,6 +32,10 @@ var gameData = {
     playerScore: 0,
     computerScore: 0
 }
+
+// GAME MODES
+var classicMode = ["Rock", "Paper", "Scissors"];
+var variationMode = ["Rock", "Paper", "Scissors", "Fish", "Alien"];
 
 // FUNCTIONS
 function createPlayer(name, choice) {
@@ -69,87 +62,74 @@ function createGame(human, computer) {
     return game;
 }
 
-function getResult(game, choice, compChoice) {
-    // Result messages
-    var resDraw = `<strong>It's a DRAW.</strong> You both chose ${choice}.`
-    var resWin = `<strong>You WIN!</strong> Computer chose ${compChoice}.`
-    var resLoss = `<strong>You LOSE.</strong> Computer chose ${compChoice}.`
+function handleGameMode(event) {
+    if (event.target.classList.contains("classic")) {
+        currentMode = "classic"
+        chooseClassic(event);
+        updateStatus('Classic: Choose your fighter!');
+    }
+    if (event.target.classList.contains("variation")) {
+        currentMode = "variation"
+        chooseVariation(event);
+        updateStatus('Variation: Choose your fighter!');
+    }
+    displayTokens();
+}
 
-    // Classic mode
-    if (currentMode === "classic") {
-        if (choice === compChoice) {
-            updateStatus(resDraw);
-        }
-        else if (choice === 'Rock' && compChoice === 'Scissors') {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        }
-        else if (choice === 'Paper' && compChoice === 'Rock') {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        }
-        else if (choice === 'Scissors' && compChoice === 'Paper') {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        } else {
-            game.computer.isWinner = true
-            updateStatus(resLoss);
+function getWinner(choice, compChoice) {
+    if (choice === compChoice) {
+        return 'draw';
+    }
+
+    var winConditions = {
+        classic: {
+            Rock: "Scissors",
+            Paper: "Rock",
+            Scissors: "Paper"
+        },
+        variation: {
+            Rock: ['Scissors', 'Fish'],
+            Paper: ['Rock', 'Alien'],
+            Scissors: ['Paper', 'Fish'],
+            Fish: ['Paper', 'Alien'],
+            Alien: ['Scissors', 'Rock']
         }
     }
-    // Variation mode
-    if (currentMode === "variation") {
-        if (choice === compChoice) {
-            updateStatus(resDraw);
-        }
-        else if ((choice === 'Rock' && (compChoice === 'Scissors' || compChoice === 'Fish'))) {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        }
-        else if ((choice === 'Paper' && (compChoice === 'Rock' || compChoice === 'Alien'))) {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        }
-        else if ((choice === 'Scissors' && (compChoice === 'Paper' || compChoice === 'Fish'))) {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        }
-        else if ((choice === 'Fish' && (compChoice === 'Paper' || compChoice === 'Alien'))) {
-            game.human.isWinner = true
-            updateStatus(resWin);
-        }
-        else if ((choice === 'Alien' && (compChoice === 'Scissors' || compChoice === 'Rock'))) {
-            game.human.isWinner = true
-            updateStatus(resWin);            
-        } else {
-            game.computer.isWinner = true
-            updateStatus(resLoss);
-        }
+
+    if (winConditions[currentMode][choice].includes(compChoice)) {
+        return 'player';
+    } else {
+        return 'computer';
+    }
+}
+
+function getResult(game, choice, compChoice) {
+    var result = getWinner(choice, compChoice);
+
+    if (result === 'draw') {
+        updateStatus(`<strong>It's a DRAW.</strong> You both chose ${choice}.`);
+    } else if (result === 'player') {
+        game.human.isWinner = true;
+        updateStatus(`<strong>You WIN!</strong> Computer chose ${compChoice}.`);
+    } else {
+        game.computer.isWinner = true;
+        updateStatus(`<strong>You LOSE.</strong> Computer chose ${compChoice}.`);
     }
 }
 
 function updateScore(game) {
     if (game.human.isWinner === true && game.computer.isWinner === false) {
-        var human = game.human;
         gameData.playerScore += 1;
-        updateWins(human);
-        return game;
+        updateWins(game.human);
     }
     if (game.human.isWinner === false && game.computer.isWinner === true) {
-        var computer = game.computer;
         gameData.computerScore += 1;
-        updateWins(computer);
-        return game;
+        updateWins(game.computer);
     }
     if (game.human.isWinner === false && game.computer.isWinner === false) {
         playerScore.style.color = 'black';
         computerScore.style.color = 'black';
     }
-}
-
-function resetGame(game) {
-    game.human.isWinner = false;
-    game.computer.isWinner = false;
-    return game;
 }
 
 function getChoice(event) {
@@ -159,33 +139,30 @@ function getChoice(event) {
 
     var choice = event.target.getAttribute("id");
     var compChoice = getComputerChoice();
+    var human = createPlayer('Human', choice);
+    var computer = createPlayer('Computer', compChoice);
+    var game = createGame(human, computer);
 
-    if (choice) {
-        human = createPlayer('Human', choice);
-        computer = createPlayer('Computer', compChoice);
-        var game = createGame(human, computer);
+    updateStatus(`Computer is deciding...`);
+    showPlayerToken(choice);
+    // Prevent spam clicking
+    buttonsDisabled = true; 
 
-        updateStatus(`Computer is deciding...`);
-        hideTokens(choice);
-        // Prevent spam clicking
-        buttonsDisabled = true; 
+    setTimeout(function() {
+        getResult(game, choice, compChoice)
+        tokenFight(choice, compChoice)
+        updateScore(game);
+        displayChangeGameBtn();
 
         setTimeout(function() {
-            getResult(game, choice, compChoice)
-            tokenFight(choice, compChoice)
-            updateScore(game);
-            resetGame(game);
-            displayChangeGameBtn();
-
-            setTimeout(function() {
-                updateStatus(`Choose your fighter!`);
-                displayTokens();
-                // Re-enable button                
-                buttonsDisabled = false;
-            }, 2000);
+            updateStatus(`Choose your fighter!`);
+            displayTokens();
+            // Re-enable button                
+            buttonsDisabled = false;
         }, 2000);
-    }
+    }, 2000);
 }
+
 
 function getComputerChoice() {
     var classicMode = ["Rock", "Paper", "Scissors"];
@@ -197,8 +174,7 @@ function getComputerChoice() {
         mode = variationMode;
     }
     var randomIndex = Math.floor(Math.random() * mode.length);
-    var compChoice = mode[randomIndex];
-    return compChoice;
+    return mode[randomIndex];
 }
 
 function updateStatus(result) {
@@ -219,30 +195,33 @@ function updateWins(winner) {
 }
 
 function chooseClassic() {
-    intro.classList.add("hidden");
-    choose.classList.remove("hidden");
-    fish.classList.add("hidden");
-    alien.classList.add("hidden");
+    hideElement(intro);
+    hideElement(fish);
+    hideElement(alien);
+    showElement(choose);
+
 }
 
 function chooseVariation() {
-    intro.classList.add("hidden");
-    choose.classList.remove("hidden");
+    hideElement(intro);
+    showElement(choose);
 }
 
 function changeGame() {
-    location.reload();
+    showElement(intro);
+    hideElement(choose);
+    hideChangeGameBtn();
 }
 
 function hideChangeGameBtn() {
-    changeGameBtn.classList.add("hidden");
+    hideElement(changeGameBtn);
 }
 
 function displayChangeGameBtn() {
-    changeGameBtn.classList.remove("hidden");
+    showElement(changeGameBtn);
 }
 
-function hideTokens(choice) {
+function showPlayerToken(choice) {
     choose.innerHTML = `<img src="assets/${choice}.png" alt="${choice}" class="token" id="${choice}">`
 }
 
@@ -254,15 +233,24 @@ function tokenFight(choice, compChoice) {
 function displayTokens() {
     choose.innerHTML = ``;
     if (currentMode === "classic") {
-        choose.innerHTML += `<img src="assets/Rock.png" alt="Rock" class="token" id="Rock">`
-        choose.innerHTML += `<img src="assets/Paper.png" alt="Paper" class="token" id="Paper">`
-        choose.innerHTML += `<img src="assets/Scissors.png" alt="Scissors" class="token" id="Scissors">`
+        choose.innerHTML = 
+        `<img src="assets/Rock.png" alt="Rock" class="token" id="Rock">
+        <img src="assets/Paper.png" alt="Paper" class="token" id="Paper">
+        <img src="assets/Scissors.png" alt="Scissors" class="token" id="Scissors">`
     }
     if (currentMode === "variation") {
-        choose.innerHTML += `<img src="assets/Rock.png" alt="Rock" class="token" id="Rock">`
-        choose.innerHTML += `<img src="assets/Paper.png" alt="Paper" class="token" id="Paper">`
-        choose.innerHTML += `<img src="assets/Scissors.png" alt="Scissors" class="token" id="Scissors">`
-        choose.innerHTML += `<img src="assets/Fish.png" alt="Fish" class="token" id="Fish">`
-        choose.innerHTML += `<img src="assets/Alien.png" alt="Alien" class="token" id="Alien">`
+        choose.innerHTML = `<img src="assets/Rock.png" alt="Rock" class="token" id="Rock">
+        <img src="assets/Paper.png" alt="Paper" class="token" id="Paper">
+        <img src="assets/Scissors.png" alt="Scissors" class="token" id="Scissors">
+        <img src="assets/Fish.png" alt="Fish" class="token" id="Fish">
+        <img src="assets/Alien.png" alt="Alien" class="token" id="Alien">`
     }
+}
+
+function showElement(element) {
+    element.classList.remove("hidden");
+}
+
+function hideElement(element) {
+    element.classList.add("hidden");
 }
