@@ -1,7 +1,7 @@
 # Rock, Paper, Scissors
 
 ### Abstract:
-Challenge the computer in a game of Rock, Paper, Scissors! Play classic mode or dive into an exciting variation. Experience the timeless game with a fresh twist for an added challenge.
+Challenge the computer in a game of Rock, Paper, Scissors! Play classic mode or experience a fresh twist in variation mode.
 
 ### Installation Instructions:
 1. View on [GitHub Pages](https://joh-ann.github.io/rps-solo/)
