@@ -73,7 +73,7 @@ function handleGameMode(event) {
         chooseVariation(event);
         updateStatus('Variation: Choose your fighter!');
     }
-    displayTokens;
+    displayTokens();
 }
 
 function getWinner(choice, compChoice) {
@@ -132,12 +132,6 @@ function updateScore(game) {
     }
 }
 
-function resetGame(game) {
-    game.human.isWinner = false;
-    game.computer.isWinner = false;
-    return game;
-}
-
 function getChoice(event) {
     if (buttonsDisabled) {
         return;
@@ -158,7 +152,6 @@ function getChoice(event) {
         getResult(game, choice, compChoice)
         tokenFight(choice, compChoice)
         updateScore(game);
-        resetGame(game);
         displayChangeGameBtn();
 
         setTimeout(function() {
@@ -217,6 +210,7 @@ function chooseVariation() {
 function changeGame() {
     showElement(intro);
     hideElement(choose);
+    hideChangeGameBtn();
 }
 
 function hideChangeGameBtn() {
