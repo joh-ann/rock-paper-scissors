@@ -156,10 +156,19 @@ aside {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-content: center;
+    list-style: none;
+    padding: 0px;
 }
 
-.classic-wrapper {
-    margin-top: 15px;    
+.classic-wrapper li {
+    margin: 0px;    
+}
+
+.classic,
+.variation {
+    display: flex;
+    align-items: center;
 }
 
 .classic:hover, 
@@ -180,6 +189,7 @@ aside {
     font-size: 1.2em;
     font-weight: 700;
     margin-bottom: 15px;
+    padding-left: 0px;
 }
 
 .choose {

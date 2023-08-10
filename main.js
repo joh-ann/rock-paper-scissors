@@ -166,8 +166,8 @@ function getChoice(event) {
             displayTokens();
             // Re-enable button                
             buttonsDisabled = false;
-        }, 2000);
-    }, 2000);
+        }, 1000);
+    }, 750);
 }
 
 
