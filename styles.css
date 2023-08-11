@@ -179,11 +179,6 @@ aside {
     background-color: #E8E9EB;
 }
 
-.classic:active, 
-.variation:active {
-    background-color: #D3D4D6;
-}
-
 .classic-title, 
 .variation-title {
     font-size: 1.2em;
